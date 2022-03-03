@@ -1,9 +1,8 @@
 import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const App = () => {
 	const onFinish = (values) => {
-		console.log("Received values of form: ", values);
+		console.log(values);
 	};
 
 	return (
@@ -37,12 +36,7 @@ const App = () => {
 						<span className="h-px w-16 bg-gray-300"></span>
 					</div>
 
-					<Form
-						name="normal_login"
-						className="login-form"
-						initialValues={{ remember: true }}
-						onFinish={onFinish}
-					>
+					<Form onFinish={onFinish}>
 						<Form.Item
 							name="Email"
 							rules={[
@@ -57,7 +51,7 @@ const App = () => {
 								</label>
 							}
 						>
-							<input className="form-control" />
+							<input className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
 						</Form.Item>
 						<Form.Item
 							name="Password"
@@ -73,14 +67,14 @@ const App = () => {
 								</label>
 							}
 						>
-							<input className="form-control" />
+							<input className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
 						</Form.Item>
 
 						<Form.Item>
 							<Button
 								type="primary"
 								htmlType="submit"
-								className="login-form-button"
+								className="btn btn-blue"
 							>
 								Log in
 							</Button>
