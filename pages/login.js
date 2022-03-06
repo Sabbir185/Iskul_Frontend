@@ -36,7 +36,12 @@ const App = () => {
 						<span className="h-px w-16 bg-gray-300"></span>
 					</div>
 
-					<Form onFinish={onFinish}>
+					<Form
+						onFinish={onFinish}
+						initialValues={{
+							remember: true,
+						}}
+					>
 						<Form.Item
 							name="Email"
 							rules={[
