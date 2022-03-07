@@ -1,12 +1,13 @@
 import { Fragment } from "react";
 import Link from 'next/link'
+import Navbar from "./navbar";
 
 const Layout = (props) => {
     return (
         <>
             <div className="relative">
                 <div className="w-0 md:w-64 h-screen fixed mt-0 left-0 top-0 bg-green-300">
-                    <ul>
+                    {/* <ul>
                         <li className="py-2">
                             <Link href="/">
                                 <a className="p-4">Dashboard</a>
@@ -17,10 +18,8 @@ const Layout = (props) => {
                                 <a className="p-4">Students</a>
                             </Link>
                         </li>
-                    </ul>
-
-
-
+                    </ul> */}
+                    <Navbar></Navbar>
                 </div>
                 <main className="ml-0 md:ml-64 mt-16 p-4">
                     {props.children}
