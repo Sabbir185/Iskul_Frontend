@@ -13,9 +13,23 @@ const SideMenu = () => {
       </div>
 
       <div className="mt-5">
+        <p>Main Menu</p>
+        <br />
         <h1>Dashboard</h1>
-        <h1>Management</h1>
+        <h1>Students</h1>
+        <h1>Teachers</h1>
+        <h1>Departments</h1>
+        <h1>Subjects</h1>
         <h1>Others</h1>
+        <br />
+        <p>Management</p>
+        <br />
+        <h1>Holiday</h1>
+        <h1>Fees</h1>
+        <h1>Exam list</h1>
+        <h1>Events</h1>
+        <h1>Time Table</h1>
+        <h1>Library</h1>
       </div>
     </section>
   );
