@@ -16,23 +16,57 @@ const SideMenu = () => {
       <div className="mt-5">
         <p>Main Menu</p>
         <br />
-        <Link href="/login">
-          <a>Dashboard</a>
+        <Link href="/">
+          <a className="text-xl font-bold"> Dashboard</a>
         </Link>
-        <h1>Students</h1>
-        <h1>Teachers</h1>
-        <h1>Departments</h1>
-        <h1>Subjects</h1>
-        <h1>Others</h1>
+        <br />
+        <Link href="/students">
+          <a className="text-xl font-bold">Students</a>
+        </Link>
+        <br />
+        <Link href="/teachers">
+          <a className="text-xl font-bold">Teachers</a>
+        </Link>
+        <br />
+        <Link href="/departments">
+          <a className="text-xl font-bold">Departments</a>
+        </Link>
+        <br />
+        <Link href="/subjects">
+          <a className="text-xl font-bold">Subjects</a>
+        </Link>
+        <br />
+        <Link href="/others">
+          <a className="text-xl font-bold">Others</a>
+        </Link>
+        <br />
         <br />
         <p>Management</p>
         <br />
-        <h1>Holiday</h1>
-        <h1>Fees</h1>
-        <h1>Exam list</h1>
-        <h1>Events</h1>
-        <h1>Time Table</h1>
-        <h1>Library</h1>
+        <Link href="/holiday">
+          <a className="text-xl font-bold">Holiday</a>
+        </Link>
+        <br />
+        <Link href="/fees">
+          <a className="text-xl font-bold">Fees</a>
+        </Link>
+        <br />
+        <Link href="/examList">
+          <a className="text-xl font-bold">Exam list</a>
+        </Link>
+        <br />
+        <Link href="/events">
+          <a className="text-xl font-bold">Events</a>
+        </Link>
+        <br />
+        <Link href="/timeTable">
+          <a className="text-xl font-bold">Time Table</a>
+        </Link>
+        <br />
+        <Link href="/library">
+          <a className="text-xl font-bold">Library</a>
+        </Link>
+        <br />
       </div>
     </section>
   );
