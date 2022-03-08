@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import logo2 from "../../public/images/logo2.png";
 
@@ -14,13 +13,9 @@ const SideMenu = () => {
       </div>
 
       <div className="mt-5">
-        <Link href="/">
-          <a> Dashboard</a>
-        </Link>
-        <br />
-        <Link href="/students">
-          <a>Students Page</a>
-        </Link>
+        <h1>Dashboard</h1>
+        <h1>Management</h1>
+        <h1>Other</h1>
       </div>
     </section>
   );

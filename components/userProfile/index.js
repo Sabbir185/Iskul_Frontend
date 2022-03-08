@@ -48,18 +48,18 @@ const Profile = () => {
         } border-2 border-gray-300`}
       >
         <li className="flex flex-row items-center mb-2">
-          <div className="h-16 w-16 pr-1 mx-1">
+          <div className="h-16 w-16 pr-1 mx-2">
             <Image
               src={Avatar}
               alt="default image"
               className={`shrink-0 ${classes.profileImage}`}
             />
           </div>
-          <div className=" text-left text-gray-700 ">
-            <h3 className="border-green-500 border-l-2 pl-1 font-semibold tracking-wider">
+          <div className="text-left text-gray-700">
+            <h3 className="border-l-2 border-green-500 pl-1 font-semibold tracking-wider">
               Sabbir
             </h3>
-            <p className=" border-l-2 pl-1 border-green-500 font-semibold tracking-wider ">
+            <p className="border-l-2 border-green-500 pl-1 font-semibold tracking-wider">
               Teacher
             </p>
           </div>

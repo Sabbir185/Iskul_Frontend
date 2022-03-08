@@ -1,4 +1,5 @@
 import { FaSnapchatGhost } from "react-icons/fa";
+
 const Notifications = () => {
   return (
     <div
