@@ -48,7 +48,7 @@ const Profile = () => {
         } border-2 border-gray-300`}
       >
         <li className="flex flex-row items-center mb-2">
-          <div className="h-16 w-16 pr-1 mx-4">
+          <div className="h-10 w-10 pr-1 mx-6">
             <Image
               src={Avatar}
               alt="default image"
