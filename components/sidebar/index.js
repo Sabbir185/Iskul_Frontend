@@ -5,6 +5,8 @@ import Image from "next/image";
 import SidebarMenu from './sidebarMenu'
 
 const SideMenu = () => {
+	
+
 	return (
 		<section className="flex flex-col items-center justify-center">
 			<div className="w-56 flex flex-col items-center justify-center rounded-full relative border-b-2">
