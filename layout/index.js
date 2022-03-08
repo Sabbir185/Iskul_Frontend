@@ -18,7 +18,7 @@ const Layout = (props) => {
 	return (
 		<>
 			<div className="relative">
-				<div className={`${toggle?"block md:w-64":"hidden"} h-screen fixed mt-0 left-0 top-0 bg-green-300`}>
+				<div className={`${toggle?"block md:w-64":"hidden"} h-screen fixed mt-0 left-0 top-0`} style={{backgroundColor: "#001529"}}>
 					<SideMenu />
 				</div>
 
