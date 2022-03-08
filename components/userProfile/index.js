@@ -69,7 +69,7 @@ const Profile = () => {
         </li>
 
         <li className={classes.dropLink}>
-          <a href="login">Sign out</a>
+          <a href="">Sign out</a>
         </li>
       </ul>
     </div>
