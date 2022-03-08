@@ -21,7 +21,6 @@ const Layout = (props) => {
         : mainT.setAttribute('layout', 'mainToggle')
 
 	}
-	
 
 	return (
 		<>
@@ -33,7 +32,7 @@ const Layout = (props) => {
 				<main id="mainToggle" className={`ml-0 md:ml-64 mt-16 p-4`}>
 					{props.children}
 				</main>
-				
+
 				<div id="navbarToggle" className={`h-16 fixed left-0 md:left-64 top-0 right-0 bg-slate-100`}>
 					<Navbar toggleChange={toggleHandler}/>
 				</div>

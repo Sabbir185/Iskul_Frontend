@@ -3,6 +3,8 @@
 @tailwind utilities;
 @tailwind screens;
 
+/* #001529 */
+
 
 .nav {
     @apply bg-white w-0 md:w-64; 
