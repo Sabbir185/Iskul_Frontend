@@ -10,7 +10,7 @@ const SideMenu = () => {
 		<section className="flex flex-col items-center justify-center">
 			<div className="w-56 flex flex-col items-center justify-center rounded-full relative border-b-2">
 				<Image className="shrink-0 " src={logo2} alt="logo" />
-				<p className="mt-0 pt-0 absolute bottom-2 text-md font-semibold text-gray-400">
+				<p className="mt-0 pt-0 absolute bottom-2 text-md font-semibold text-cyan-600">
 					Skul Management
 				</p>
 			</div>
