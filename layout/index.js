@@ -1,31 +1,39 @@
-import { useState } from "react";
-import Navbar from "../components/navbar";
 import SideMenu from "../components/sidebar";
+import Navbar from "../components/navbar";
 
 const Layout = (props) => {
-  const [toggle, setToggle] = useState(true);
-  const toggleHandler = () => {
-    if (toggle === false) {
-      setToggle(true);
-    } else {
-      setToggle(false);
-    }
-  };
 
-  console.log(toggle);
+	const toggleHandler = () => {
+		const sidebar = document.querySelector("#sideToggle");
+		const navbar = document.querySelector("#navbarToggle");
+		const mainT = document.querySelector("#mainToggle");
+		
+		navbar.getAttribute('layout') === 'navBarToggle'
+        ? navbar.removeAttribute('layout')
+        : navbar.setAttribute('layout', 'navBarToggle')
+
+		sidebar.getAttribute('layout') === 'sidebarToggle'
+        ? sidebar.removeAttribute('layout')
+        : sidebar.setAttribute('layout', 'sidebarToggle')
+
+		mainT.getAttribute('layout') === 'mainToggle'
+        ? mainT.removeAttribute('layout')
+        : mainT.setAttribute('layout', 'mainToggle')
+
+	}
 
 	return (
 		<>
 			<div className="relative">
-				<div className={`${toggle?"block md:w-64":"hidden"} h-screen fixed mt-0 left-0 top-0`} style={{backgroundColor: "#001529"}}>
+				<div id='sideToggle' className={`h-screen md:w-64 fixed mt-0 left-0 top-0`} style={{backgroundColor: "#001529"}}>
 					<SideMenu />
 				</div>
 
-				<main className={`ml-0 ${toggle?"md:ml-64":""} mt-16 p-4`}>
+				<main id="mainToggle" className={`ml-0 md:ml-64 mt-16 p-4`}>
 					{props.children}
 				</main>
 
-				<div className={`h-16 fixed left-0 ${toggle?"md:left-64":""} top-0 right-0 bg-slate-100`}>
+				<div id="navbarToggle" className={`h-16 fixed left-0 md:left-64 top-0 right-0 bg-slate-100`}>
 					<Navbar toggleChange={toggleHandler}/>
 				</div>
 			</div>

@@ -11,6 +11,7 @@
   "dependencies": {
 <<<<<<< HEAD
     "@ant-design/icons": "^4.7.0",
+    "@metismenu/react": "^0.0.2",
     "antd": "^4.19.0",
 =======
     "@metismenu/react": "^0.0.2",
@@ -20,8 +21,7 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "react-metismenu": "^1.4.0"
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

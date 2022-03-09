@@ -1,44 +1,25 @@
+import React from "react";
+import logo2 from "../../public/images/logo2.png";
 import Image from "next/image";
-<<<<<<< HEAD
-import SidebarMenu from './sidebarMenu'
+import SidebarNav from "./sidebarNav";
 
 const SideMenu = () => {
+	
+
 	return (
 		<section className="flex flex-col items-center justify-center">
 			<div className="w-56 flex flex-col items-center justify-center rounded-full relative border-b-2">
 				<Image className="shrink-0 " src={logo2} alt="logo" />
-				<p className="mt-0 pt-0 absolute bottom-2 text-lg font-normal text-gray-400">
+				<p className="mt-0 pt-0 absolute bottom-2 text-md font-semibold text-cyan-600">
 					Skul Management
 				</p>
 			</div>
 
-			<div className="mt-10">
-				<SidebarMenu/>
+			<div className="mt-10 w-full h-auto ml-8">
+				<SidebarNav/>
 			</div>
 		</section>
 	);
-=======
-import React from "react";
-import logo2 from "../../public/images/logo2.png";
-
-const SideMenu = () => {
-  return (
-    <section className="flex flex-col items-center justify-center">
-      <div className="w-56 flex flex-col items-center justify-center rounded-full relative border-b-2">
-        <Image className="shrink-0 " src={logo2} alt="logo" />
-        <p className="mt-0 pt-0 absolute bottom-6 text-lg font-bold text-gray-600 odd:">
-          Skul Management
-        </p>
-      </div>
-
-      <div className="mt-5">
-        <h1>Dashboard</h1>
-        <h1>Management</h1>
-        <h1>Other</h1>
-      </div>
-    </section>
-  );
->>>>>>> de96bf262150bbe7f5d1e49e44756eb484406059
 };
 
 export default SideMenu;
