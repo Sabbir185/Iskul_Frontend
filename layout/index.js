@@ -1,19 +1,18 @@
-import SideMenu from "../components/sidebar";
-import Navbar from "../components/navbar";
 import { useState } from "react";
+import Navbar from "../components/navbar";
+import SideMenu from "../components/sidebar";
 
 const Layout = (props) => {
-	const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(true);
+  const toggleHandler = () => {
+    if (toggle === false) {
+      setToggle(true);
+    } else {
+      setToggle(false);
+    }
+  };
 
-	const toggleHandler = () => {
-		if(toggle===false){
-			setToggle(true)
-		}else{
-			setToggle(false)
-		}
-	}
-	
-	console.log(toggle)
+  console.log(toggle);
 
 	return (
 		<>
@@ -33,5 +32,4 @@ const Layout = (props) => {
 		</>
 	);
 };
-
 export default Layout;
