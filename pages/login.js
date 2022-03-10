@@ -1,10 +1,31 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Login = () => {
-	const onFinish = (values) => {
-        console.log(values);
-    };
+	const router = useRouter()
+
+	const onFinish = async (values) => {
+		try {
+
+			const res = await axios.post(
+				"http://localhost:8080/user/login",
+				values
+			);
+
+			if (res.data.token) {
+				Cookies.set("token", res.data.token);
+				router.push("/");
+			} else {
+				router.push("/login");
+			}
+
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 	<div>
