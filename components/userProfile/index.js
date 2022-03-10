@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 import Avatar from "../../public/images/avatar.png";
 import classes from "./userProfile.module.css";
+import Cookies from 'js-cookie'
 
 const Profile = () => {
   const [dropdown, setDropdown] = useState(true);
@@ -15,6 +16,10 @@ const Profile = () => {
       setDropdown(true);
     }
   };
+
+  const logoutHandling = () => {
+    Cookies.remove('token')
+  }
 
   return (
     <div className="relative mr-10">
@@ -72,7 +77,7 @@ const Profile = () => {
           <a href="">Inbox</a>
         </li>
 
-        <li className={classes.dropLink}>
+        <li className={classes.dropLink} onClick={logoutHandling}>
           <a href="">Sign out</a>
         </li>
       </ul>
