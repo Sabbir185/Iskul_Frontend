@@ -10,9 +10,9 @@
     @apply bg-white w-0 md:w-64; 
     
 }
-.bg-img{
-    @apply bg-slate-500;
-}
+/* .bg-img{
+    @apply opacity-25;
+} */
 
 
 [layout="sidebarToggle"] {
