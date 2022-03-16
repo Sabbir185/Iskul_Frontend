@@ -4,10 +4,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 
+
 const Login = () => {
 	const router = useRouter()
 
 	const onFinish = async (values) => {
+        console.log(values)
 		try {
 
 			const res = await axios.post(
@@ -57,47 +59,47 @@ const Login = () => {
                 </div>
                 </div>
                 <div>
-                <Form
-                    onFinish={onFinish}
-                    initialValues={{
-                    remember: true,
-                    }}
-                    >
-                    <Form.Item
-                        name="email"
-                        rules={[{
-                            required: true,
-                            message: "Please input your Password!",},
-                        ]}
-                        label={<label className="theme-font-color">Email</label>}
-                    >
-                        <input className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
-                    </Form.Item>
-                    <Form.Item
-                        name="password"
-                        rules={[{
-                            required: true,
-                            message: "Please input your Password!",
-                            },
-                        ]}
-                        label={<label className="theme-font-color">Password</label>}
-                    >
-                        <Input.Password className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    <Form
+                        onFinish={onFinish}
+                        initialValues={{
+                        remember: true,
+                        }}
                         >
-                        Log in
-                        </Button>
-                    </Form.Item>
-                </Form>
-            <p classNameName="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                <span>Donot have a account?</span>
-                <Link href="signup" ><span className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"> Sign in</span></Link>
-            </p>
+                        <Form.Item
+                            name="email"
+                            rules={[{
+                                required: true,
+                                message: "Please input your Password!",},
+                            ]}
+                            label={<label className="theme-font-color">Email</label>}
+                        >
+                            <input className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[{
+                                required: true,
+                                message: "Please input your Password!",
+                                },
+                            ]}
+                            label={<label className="theme-font-color">Password</label>}
+                        >
+                            <Input.Password className="shadow appearance-none border w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" />
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            >
+                            Log in
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                    <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
+                        <span>Donot have a account?</span>
+                        <Link href="signup" ><span className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"> Sign in</span></Link>
+                    </p>
                 </div>
             </div>
         </div>

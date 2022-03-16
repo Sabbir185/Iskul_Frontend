@@ -1,14 +1,14 @@
 import "../styles/globals.css";
 import "antd/dist/antd.css";
 import "metismenujs/dist/metismenujs.css";
-import AppContext from "../context/AppContext";
+import { UserContextProvider } from "../contexts/userContext";
 
 function MyApp({ Component, pageProps }) {
 	
 	return (
-		<>
+		<UserContextProvider>
 			<Component {...pageProps} />;
-		</>
+		</UserContextProvider>
 	);
 }
 

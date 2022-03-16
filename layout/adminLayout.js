@@ -1,7 +1,7 @@
 import SideMenu from "../components/sidebar";
 import Navbar from "../components/navbar";
 
-const Layout = (props) => {
+const AdminLayout = (props) => {
 
 	const toggleHandler = () => {
 		const sidebar = document.querySelector("#sideToggle");
@@ -40,4 +40,4 @@ const Layout = (props) => {
 		</>
 	);
 };
-export default Layout;
+export default AdminLayout;
