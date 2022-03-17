@@ -9,7 +9,6 @@ const Signup = () => {
 	const router = useRouter();
 
 	const onFinish = async (values) => {
-        console.log(values)
 		try {
 			const res = await axios.post(
 				"http://localhost:8080/user/signup",
@@ -153,9 +152,9 @@ const Signup = () => {
 					</Form>
 					<p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
 						<span>Already have an account?</span>
-						<Link href="login">
+						<Link href="/login">
 							<span className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300">
-								Sign in
+								Login
 							</span>
 						</Link>
 					</p>

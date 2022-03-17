@@ -9,7 +9,6 @@ const Login = () => {
 	const router = useRouter()
 
 	const onFinish = async (values) => {
-        console.log(values)
 		try {
 
 			const res = await axios.post(
@@ -19,7 +18,7 @@ const Login = () => {
 
 			if (res.data.token) {
 				Cookies.set("token", res.data.token);
-				router.push("/");
+				router.replace("/");
 			} else {
 				router.push("/login");
 			}
@@ -28,6 +27,7 @@ const Login = () => {
 			console.log(error);
 		}
 	};
+    
 
 	return (
 	<div>
@@ -97,8 +97,8 @@ const Login = () => {
                         </Form.Item>
                     </Form>
                     <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
-                        <span>Donot have a account?</span>
-                        <Link href="signup" ><span className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"> Sign in</span></Link>
+                        <span>Do not have an account?</span>
+                        <Link href="/signup" ><span className="text-indigo-500 hover:text-indigo-500no-underline hover:underline cursor-pointer transition ease-in duration-300"> Sign Up</span></Link>
                     </p>
                 </div>
             </div>

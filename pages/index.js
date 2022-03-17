@@ -1,35 +1,34 @@
-import {useRouter} from 'next/router'
-import AdminLayout from "../layout/adminLayout";
-import Cookies from 'js-cookie';
-import jwt_decode from "jwt-decode";
-import { useContext, useEffect } from "react";
-import UserContext from "../contexts/userContext";
+import  Layout  from '../layout/adminLayout';
+import { useRouter } from 'next/router'
+import { useEffect } from "react";
+// import Cookies from 'js-cookie';
+// import jwt_decode from "jwt-decode";
+import { useUser } from '../contexts/userContext';
 
 
 export default function Home() {
+	const { user, verify } = useUser();
 	const router = useRouter();
-    const [user, setUser] = useContext(UserContext)
-
-	const token = Cookies.get('token');
-	const jwt = `${token}`
 
 	useEffect(()=>{
-		if(token) {
-			const decoded = jwt_decode(jwt);
-			setUser(decoded)
-		} else {
-			router.push('/login')
+		verify()
+	},[])
+
+	useEffect(()=>{
+		
+		if (user?.role === 'student') {
+			router.push('/student');
+	
+		} else if (user?.role === 'admin') {
+			router.push('/admin')
+	
+		} else if (user?.role === 'school') {
+			router.push('/school')
 		}
 
-	},[jwt, setUser, token])
+	},[user])
 
-	if(user.role === 'student') {
-		router.push('/students')
-	} else if(user.role === 'admin') {
-		router.push('/')
-	}
-
-
+	console.log(user)
 
 	return (
 		<>
