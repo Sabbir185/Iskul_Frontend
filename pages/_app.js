@@ -1,14 +1,17 @@
 import "../styles/globals.css";
 import "antd/dist/antd.css";
 import "metismenujs/dist/metismenujs.css";
-import AppContext from "../context/AppContext";
+import { useRouter } from 'next/router'
+import { UserContextProvider } from "../contexts/userContext";
 
 function MyApp({ Component, pageProps }) {
+
 	return (
-		<AppContext.Provider>
+		<UserContextProvider>
 			<Component {...pageProps} />;
-		</AppContext.Provider>
+		</UserContextProvider>
 	);
+
 }
 
 export default MyApp;
