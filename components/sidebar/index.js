@@ -1,10 +1,11 @@
 import React from "react";
 import logo2 from "../../public/images/logo2.png";
 import Image from "next/image";
-import SidebarNav from "./sidebarNav";
+import SidebarNav from "../sidebarMenu/sidebarNav";
+import sidebarData from "../sidebarMenu/sideNavData";
 
 const SideMenu = () => {
-	
+
 
 	return (
 		<section className="flex flex-col items-center justify-center">
@@ -15,8 +16,10 @@ const SideMenu = () => {
 				</p>
 			</div>
 
-			<div className="mt-10 w-full h-auto ml-8">
-				<SidebarNav/>
+			<div className="mt-10 w-60 h-auto px-6">
+				{
+					sidebarData?.map((info, i , a)=> <SidebarNav key={i} data={info}/>)
+				}
 			</div>
 		</section>
 	);

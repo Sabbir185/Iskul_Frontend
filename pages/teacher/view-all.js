@@ -4,7 +4,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie';
 import TableContainer from '../../components/table/tableContainer';
 
-const Admin = () => {
+const ViewAll = () => {
     const [adminInfo, setAdminInfo] = useState([]);
     const token = Cookies.get('token')
 
@@ -14,7 +14,7 @@ const Admin = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 }
-                const result = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=admin`, config);
+                const result = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=headmaster&role=teacher`, config);
 
                 setAdminInfo(result.data.data)
 
@@ -27,15 +27,13 @@ const Admin = () => {
 
     // console.log(adminInfo);
     const tableHeader = ['SN', 'Full Name', 'Email', 'Role', 'Action']
-
     return (
         <AdminLayout>
-            <h1 className='ml-16 font-semibold text-lg mt-4'>Admin Information</h1>
+            <h1 className='ml-16 font-semibold text-lg mt-4'>Teacher List</h1>
            
-            <TableContainer  data={adminInfo} tableHeader={tableHeader}/>
-            
+           <TableContainer  data={adminInfo} tableHeader={tableHeader}/>
         </AdminLayout>
     );
 };
 
-export default Admin;
+export default ViewAll;

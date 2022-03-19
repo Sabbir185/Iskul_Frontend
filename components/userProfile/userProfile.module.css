@@ -15,7 +15,7 @@
   color: rgb(8, 167, 8);
   text-align: center;
   font-weight: 600;
-  border: 2px solid wheat;
+  border: 2px solid rgba(8, 167, 8, 0.144);
   border-radius: 10px;
   height: 30px;
 }
