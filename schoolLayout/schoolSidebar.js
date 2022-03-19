@@ -1,22 +1,23 @@
-import React from "react";
-import logo2 from "../../public/images/logo2.png";
+import logo2 from "../public/images/logo.png";
 import Image from "next/image";
-import SidebarNav from "./sidebarNav";
+import SchoolSideNavbar from "./schoolSideNavbar";
+const SchoolSidebar = () =>{
 
-const SideMenu = () => {
 	return (
+		<>
 		<section className="flex flex-col items-center justify-center">
 			<div className="w-56 flex flex-col items-center justify-center rounded-full relative border-b-2">
 				<Image className="shrink-0 " src={logo2} alt="logo" />
 				<p className="mt-0 pt-0 absolute bottom-2 text-md font-semibold text-cyan-600">
-					Skul Management
+					Little Angel Kindar Garden
 				</p>
 			</div>
 			<div className="mt-10 w-full h-auto ml-8">
-				<SidebarNav/>
+				<SchoolSideNavbar></SchoolSideNavbar>
 			</div>
 		</section>
+		</>
 	);
 };
 
-export default SideMenu;
+export default SchoolSidebar;

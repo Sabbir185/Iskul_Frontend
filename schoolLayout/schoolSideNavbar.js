@@ -2,15 +2,14 @@ import React from "react";
 import Link from "next/link";
 import MetisMenu from "@metismenu/react";
 import "metismenujs/dist/metismenujs.css";
-import classes from "./sidebar.module.css";
-import school from "../../schoolLayout/index";
+import classes from ".";
 import {
 	AppstoreOutlined,
 	SettingOutlined,
 	HomeOutlined,
 } from "@ant-design/icons";
 
-const SidebarNav = () => {
+const SchoolSideNavbar = () => {
 	return (
 		<React.Fragment>
 			<MetisMenu>
@@ -24,13 +23,13 @@ const SidebarNav = () => {
 						</div>
 					</Link>
 					<ul>
-						<li className={classes.navLink1}>
-							<Link href="/schoollist">School List</Link>
+						<li className="text-sm ml-7">
+							<Link href="/students">Student List</Link>
 						</li>
-						<li className={classes.navLink1}>
-							<Link href="/headsirlist">Head Teacher</Link>
+						<li className="text-sm ml-7">
+							<Link href="/teacher">Teacher List</Link>
 						</li>
-						<li className={classes.navLink1}>
+						<li className="text-sm ml-7">
 							<Link href="/students">Staff List</Link>
 						</li>
 					</ul>
@@ -46,14 +45,14 @@ const SidebarNav = () => {
 						</div>
 					</Link>
 					<ul>
-						<li className={classes.navLink1}>
-							<Link href="/addschool">Add School</Link>
+						<li className="text-sm ml-7">
+							<Link href="">Class List</Link>
 						</li>
-						<li className={classes.navLink1}>
-							<Link href="/addheadsir">Add Head Teacher</Link>
+						<li className="text-sm ml-7">
+							<Link href="">Teacher List</Link>
 						</li>
-						<li className={classes.navLink1}>
-							<Link href="/students">Coming Soon</Link>
+						<li className="text-sm ml-7">
+							<Link href="">Class Routine</Link>
 						</li>
 					</ul>
 				</li>
@@ -68,13 +67,13 @@ const SidebarNav = () => {
 						</div>
 					</Link>
 					<ul>
-						<li className={classes.navLink1}>
+						<li className="text-sm ml-7">
 							<Link href="/students">Coming Soon</Link>
 						</li>
-						<li className={classes.navLink1}>
+						<li className="text-sm ml-7">
 							<Link href="/students">Coming Soon</Link>
 						</li>
-						<li className={classes.navLink1}>
+						<li className="text-sm ml-7">
 							<Link href="/students">Coming Soon</Link>
 						</li>
 					</ul>
@@ -85,4 +84,4 @@ const SidebarNav = () => {
 	);
 };
 
-export default SidebarNav;
+export default SchoolSideNavbar;
