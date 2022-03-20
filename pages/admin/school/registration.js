@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminLayout from '../../layout/adminLayout';
+import AdminLayout from '../../../layout/adminLayout';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios'
 import Cookies from 'js-cookie';
@@ -34,7 +34,7 @@ const Registration = () => {
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4'>Register New School</h1>
 
-            <div className='w-96 m-auto'>
+            <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{width: '60%'}}>
                 <Form
                     initialValues={{
                         remember: true,
@@ -55,6 +55,19 @@ const Registration = () => {
                         ]}
                     >
                         <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Established Date"
+                        name="established"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please Input Established Year!',
+                            },
+                        ]}
+                    >
+                        <Input type='number'/>
                     </Form.Item>
 
                     <Form.Item

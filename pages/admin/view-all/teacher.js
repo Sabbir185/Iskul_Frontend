@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Link from 'next/link'
-import AdminLayout from '../../layout/adminLayout';
-import Table from '../../components/table/table';
+import AdminLayout from '../../../layout/adminLayout';
+import Table from '../../../components/table/table';
+import { Spin } from 'antd';
 
 
-
-const Students = () => {
-    const [student, setStudent] = useState([]);
+const Teacher = () => {
+    const [teacher, setTeacher] = useState([]);
     const token = Cookies.get('token');
 
     useEffect(() => {
@@ -17,9 +17,9 @@ const Students = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 }
-                const result = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=student`, config);
+                const result = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=teacher&role=headmaster`, config);
 
-                setStudent(result.data.data);
+                setTeacher(result.data.data);
 
             } catch (error) {
                 console.log(error)
@@ -43,7 +43,7 @@ const Students = () => {
             )
         },
         { dataField: 'email', headerName: 'Email' },
-        { dataField: 'currentClass', headerName: 'Class' },
+        { dataField: 'role', headerName: 'Designation' },
         {
             dataField: '_id', headerName: 'Action', formatter: _id => (
                 <div>
@@ -54,12 +54,24 @@ const Students = () => {
         },
     ]
 
+
+    if(teacher.length<1) {
+        return (
+            <AdminLayout>
+                <div className='text-center mt-20'>
+                    <Spin tip="Loading..." size="large">
+                    </Spin>
+                </div>
+            </AdminLayout>
+        )
+    }
+
     return (
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4'>Headmaster List</h1>
-            <Table data={student} columns={column} />
+            <Table data={teacher} columns={column} />
         </AdminLayout>
     );
 };
 
-export default Students;
+export default Teacher;

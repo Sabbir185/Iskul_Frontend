@@ -29,7 +29,6 @@ const SidebarNav = ({ data }) => {
 
 					</ul>
 				</li>
-
 			</MetisMenu>
 		</React.Fragment>
 	);

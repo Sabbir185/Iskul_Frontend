@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Link from 'next/link'
-import AdminLayout from '../../layout/adminLayout';
-import Table from '../../components/table/table';
+import AdminLayout from '../../../layout/adminLayout';
+import Table from '../../../components/table/table';
+import { Spin } from 'antd';
 
 
-
-const Students = () => {
+const Student = () => {
     const [student, setStudent] = useState([]);
     const token = Cookies.get('token');
 
@@ -54,12 +54,24 @@ const Students = () => {
         },
     ]
 
+    if(student.length<1) {
+        return (
+            <AdminLayout>
+                <div className='text-center mt-20'>
+                    <Spin tip="Loading..." size="large">
+                    </Spin>
+                </div>
+            </AdminLayout>
+        )
+    }
+
     return (
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4'>Headmaster List</h1>
-            <Table data={student} columns={column} />
+            <Table data={student} columns={column} /> 
         </AdminLayout>
     );
 };
 
-export default Students;
+export default Student;
+

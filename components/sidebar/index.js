@@ -2,7 +2,7 @@ import React from "react";
 import logo2 from "../../public/images/logo2.png";
 import Image from "next/image";
 import SidebarNav from "../sidebarMenu/sidebarNav";
-import sidebarData from "../sidebarMenu/sideNavData";
+import { adminSidebarData } from "../sidebarMenu/sideNavData";
 
 const SideMenu = () => {
 
@@ -18,7 +18,7 @@ const SideMenu = () => {
 
 			<div className="mt-10 w-60 h-auto px-6">
 				{
-					sidebarData?.map((info, i , a)=> <SidebarNav key={i} data={info}/>)
+					adminSidebarData?.map((info, i, a) => <SidebarNav key={i} data={info} />)
 				}
 			</div>
 		</section>

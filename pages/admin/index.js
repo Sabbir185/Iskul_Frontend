@@ -1,38 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AdminLayout from '../../layout/adminLayout';
-import axios from 'axios'
-import Cookies from 'js-cookie';
-import TableContainer from '../../components/table/tableContainer';
+
 
 const Admin = () => {
-    const [adminInfo, setAdminInfo] = useState([]);
-    const token = Cookies.get('token')
-
-    useEffect(() => {
-        async function getData() {
-            try {
-                const config = {
-                    headers: { Authorization: `Bearer ${token}` }
-                }
-                const result = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=admin`, config);
-
-                setAdminInfo(result.data.data)
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getData()
-    }, [token])
-
-    const tableHeader = ['SN', 'Full Name', 'Email', 'Role', 'Action']
-
+    
     return (
         <AdminLayout>
-            <h1 className='ml-16 font-semibold text-lg mt-4'>Admin Information</h1>
-           
-            <TableContainer  data={adminInfo} tableHeader={tableHeader}/>
-            
+            <h1 className='ml-16 font-semibold text-lg mt-4'>Dashboard Information</h1>          
         </AdminLayout>
     );
 };

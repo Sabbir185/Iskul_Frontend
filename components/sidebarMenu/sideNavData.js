@@ -7,16 +7,32 @@ import {
 	SafetyCertificateOutlined
 } from "@ant-design/icons";
 
-const sidebarData = [
+
+const adminSidebarData = [
 
 	{
 		title: "Dashboard",
-		subtitle: [{ title: 'Admin', link: 'admin' }, { title: 'Teachers', link: 'teacher/view-all' }, { title: 'Students', link: 'student/view-all' }, { title: 'Headmasters', link: 'a' }],
+		subtitle: [{ title: 'Admin', link: 'admin/view-all' }, { title: 'Teachers', link: 'admin/view-all/teacher' }, { title: 'Students', link: 'admin/view-all/student' }, { title: 'Headmasters', link: 'admin/view-all/headmaster' }],
 		icon: AppstoreOutlined
 	},
 	{
 		title: "School",
-		subtitle: [{ title: 'Add', link: 'school/registration' }, { title: 'Set Admin', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'a' }],
+		subtitle: [{ title: 'Add School', link: 'admin/school/registration' }, { title: 'Set Admin', link: 'admin/school/assign-admin' }, { title: 'Update Info', link: 'admin/school/update-school-info' }, { title: 'View All', link: 'admin/school/view-all' }],
+		icon: ReadOutlined
+	}
+];
+
+
+const teacherSidebarData = [
+
+	{
+		title: "Dashboard",
+		subtitle: [{ title: 'Admin', link: 'admin/view-all' }, { title: 'Teachers', link: 'admin/view-all/teacher' }, { title: 'Students', link: 'admin/view-all/student' }, { title: 'Headmasters', link: 'admin/view-all/headmaster' }],
+		icon: AppstoreOutlined
+	},
+	{
+		title: "School",
+		subtitle: [{ title: 'Add', link: 'admin/school/registration' }, { title: 'Set Admin', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'school/view-all' }],
 		icon: ReadOutlined
 	},
 	{
@@ -26,9 +42,10 @@ const sidebarData = [
 	},
 	{
 		title: "Student",
-		subtitle: [{ title: 'Add', link: 'student' }, { title: 'Details', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'a' }],
+		subtitle: [{ title: 'Add', link: 'student' }, { title: 'Details', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'student/view-all' }],
 		icon: TeamOutlined
 	},
-]
+];
 
-export default sidebarData;
+
+export { adminSidebarData, teacherSidebarData };

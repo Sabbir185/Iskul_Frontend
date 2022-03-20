@@ -1,16 +1,32 @@
 import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import classes from "./inputForm.module.css";
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 const InputForm = () => {
   const [input, setInput] = useState();
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
-  const formHandler = (e) => {
+
+  const formHandler = async (e) => {
     e.preventDefault();
-    console.log(input);
+    const token = await Cookies.get('token');
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+      const res = await axios.get(`http://localhost:8080/api/school/get-filtered-data?schoolEmail=${input}`, config)
+
+      console.log(res);
+
+    } catch (error) {
+      console.log(error.response.data)
+    }
   };
+
+
 
   return (
     <form
