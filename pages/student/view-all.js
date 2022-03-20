@@ -25,12 +25,12 @@ const StudentViewAll = () => {
         getData()
     }, [token])
 
-    // console.log(adminInfo);
+
     const tableHeader = ['SN', 'Full Name', 'Email', 'Class', 'Action']
+    
     return (
         <AdminLayout>
             <h1 className='ml-16 font-semibold text-lg mt-4'>Student List</h1>
-           
            <TableContainer  data={adminInfo} tableHeader={tableHeader}/>
         </AdminLayout>
     );

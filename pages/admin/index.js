@@ -25,7 +25,6 @@ const Admin = () => {
         getData()
     }, [token])
 
-    // console.log(adminInfo);
     const tableHeader = ['SN', 'Full Name', 'Email', 'Role', 'Action']
 
     return (

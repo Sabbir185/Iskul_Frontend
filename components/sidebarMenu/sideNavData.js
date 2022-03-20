@@ -16,7 +16,7 @@ const sidebarData = [
 	},
 	{
 		title: "School",
-		subtitle: [{ title: 'Add', link: 'school' }, { title: 'Set Admin', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'a' }],
+		subtitle: [{ title: 'Add', link: 'school/registration' }, { title: 'Set Admin', link: 'a' }, { title: 'Update Info', link: 'a' }, { title: 'View All', link: 'a' }],
 		icon: ReadOutlined
 	},
 	{
