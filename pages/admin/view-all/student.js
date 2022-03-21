@@ -75,7 +75,7 @@ const Student = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Student List</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Student List</h1>
             <Table data={student} columns={column} />
         </AdminLayout>
     );

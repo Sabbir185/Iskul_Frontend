@@ -1,13 +1,15 @@
-import React from 'react';
-import AdminLayout from '../../../layout/adminLayout';
+import React, { useEffect, useState } from 'react';
+import AdminLayout from '../../../../layout/adminLayout';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
 
 
-const Registration = () => {
+const Edit = () => {
+    const [schoolData, setSchoolData] = useState({})
     const router = useRouter();
+    const schoolId = router.query.id;
     const token = Cookies.get('token');
 
     const onFinish = async (values) => {
@@ -15,9 +17,9 @@ const Registration = () => {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             }
-            const response = await axios.post(`http://localhost:8080/api/school/registration`, values, config)
+            const response = await axios.patch(`http://localhost:8080/api/school/update/${schoolId}`, values, config)
             if (response.data) {
-                alert("Registration Successfull!")
+                alert("Update Successful!")
                 router.push('/admin')
             }
         } catch (error) {
@@ -25,14 +27,23 @@ const Registration = () => {
         }
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-    };
+    useEffect(() => {
+        const schoolGet = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/api/school/${schoolId}`);
+                setSchoolData(response.data.school)
+
+            } catch (error) {
+                console.log(error.response.data)
+            }
+        }
+        schoolGet()
+    }, [schoolId])
 
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Register New School</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Update School Information</h1>
 
             <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{ width: '60%' }}>
                 <Form
@@ -40,47 +51,28 @@ const Registration = () => {
                         remember: true,
                     }}
                     onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
                     autoComplete="off"
                     layout='vertical'
                 >
                     <Form.Item
                         label="School Name"
                         name="schoolName"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please Input School Name!',
-                            },
-                        ]}
                     >
-                        <Input />
+                        <Input placeholder={schoolData.schoolName}/>
                     </Form.Item>
 
                     <Form.Item
                         label="Established Date"
                         name="established"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please Input Established Year!',
-                            },
-                        ]}
                     >
-                        <Input type='number' />
+                        <Input type='number' placeholder={schoolData.established}/>
                     </Form.Item>
 
                     <Form.Item
                         label="Email"
                         name="schoolEmail"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please Input School Email!',
-                            },
-                        ]}
                     >
-                        <Input />
+                        <Input placeholder={schoolData.schoolEmail}/>
                     </Form.Item>
 
                     <Button type="primary" htmlType="submit">
@@ -93,4 +85,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Edit;

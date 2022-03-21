@@ -28,9 +28,10 @@ const SchoolViewAll = () => {
     }, [token])
 
 
-    const editHandler = () => {
-
+    const editHandler = (id) => {
+        router.push(`/admin/school/edit/${id}`)
     }
+
     const deleteHandler = async (id) => {
         const res = await deleteSchool(id)
         if (res.status) {
@@ -52,7 +53,7 @@ const SchoolViewAll = () => {
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
                 <div>
-                    <button onClick={editHandler} className='editBtn mr-2 tracking-wide'>Edit</button>
+                    <button onClick={()=>editHandler(_id)} className='editBtn mr-2 tracking-wide'>Edit</button>
                     <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
                 </div>
             )
@@ -73,7 +74,7 @@ const SchoolViewAll = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>School List</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>School List</h1>
             <Table data={school} columns={column} />
         </AdminLayout>
     );

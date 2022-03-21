@@ -76,7 +76,7 @@ const Teacher = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Teacher List</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Teacher List</h1>
             <Table data={teacher} columns={column} />
         </AdminLayout>
     );

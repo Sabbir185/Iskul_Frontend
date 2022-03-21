@@ -70,7 +70,7 @@ const Headmaster = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Headmaster List</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Headmaster List</h1>
             <Table data={headmaster} columns={column} />
         </AdminLayout>
     );

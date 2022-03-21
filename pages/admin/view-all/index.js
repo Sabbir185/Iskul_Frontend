@@ -75,7 +75,7 @@ const AdminList = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Admin List</h1>
+            <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Admin List</h1>
             <Table data={admin} columns={column} />
         </AdminLayout>
     );
