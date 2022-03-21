@@ -7,9 +7,11 @@ import classes from "./userProfile.module.css";
 import Cookies from 'js-cookie'
 import { useUser } from "../../contexts/userContext";
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 
 const Profile = () => {
+  const router = useRouter();
   const { user, logout } = useUser();
   const [dropdown, setDropdown] = useState(true);
 
@@ -20,6 +22,11 @@ const Profile = () => {
       setDropdown(true);
     }
   };
+
+
+  const profilePageHandler = (id) => {
+      router.push(`/profile/details/${id}`)
+  }
 
 
   return (
@@ -68,7 +75,7 @@ const Profile = () => {
             </p>
           </div>
         </li>
-        <li className={`cursor-pointer ${classes.dropLink}`}>
+        <li className={`cursor-pointer ${classes.dropLink}`} onClick={()=> profilePageHandler(user._id)}>
           <p>Profile</p>
         </li>
 

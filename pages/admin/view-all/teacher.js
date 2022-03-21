@@ -32,8 +32,8 @@ const Teacher = () => {
     }, [token])
 
 
-    const editHandler = () => {
-
+    const editHandler = (id) => {
+        router.push(`/user/edit/${id}`)
     }
 
     const deleteHandler = async (id) => {
@@ -55,7 +55,7 @@ const Teacher = () => {
         {
             dataField: '_id', headerName: 'Action', formatter: _id => (
                 <div>
-                    <button onClick={editHandler} className='editBtn mr-2 tracking-wide'>Edit</button>
+                    <button onClick={()=>editHandler(_id)} className='editBtn mr-2 tracking-wide'>Edit</button>
                     <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
                 </div>
             )

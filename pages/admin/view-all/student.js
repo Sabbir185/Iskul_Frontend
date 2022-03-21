@@ -41,7 +41,9 @@ const Student = () => {
     }
 
     const editHandler = () => {
-
+        const editHandler = (id) => {
+            router.push(`/user/edit/${id}`)
+        }
     }
 
     const column = [
