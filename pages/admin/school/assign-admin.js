@@ -52,7 +52,7 @@ const AssignAdmin = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Assign admin for a school</h1>
+            <h1 className='text-center font-semibold text-lg mt-2 mb-2'>Assign admin for a school</h1>
             <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{ width: '60%', height: 'auto' }}>
 
                 <Form onFinish={onFinish} layout='vertical'>

@@ -3,9 +3,13 @@ import { FaSistrix } from "react-icons/fa";
 import classes from "./inputForm.module.css";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { useSearchResult } from "../../contexts/searchInputContext";
+
 
 const InputForm = () => {
   const [input, setInput] = useState();
+  const { searchResult, setSearchResult } = useSearchResult()
+
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
@@ -19,13 +23,14 @@ const InputForm = () => {
       }
       const res = await axios.get(`http://localhost:8080/api/school/get-filtered-data?schoolEmail=${input}`, config)
 
-      console.log(res);
+      if (res.data.status === true) {
+        setSearchResult(res.data.data)
+      }
 
     } catch (error) {
-      console.log(error.response.data)
+      setSearchResult(error.response.data)
     }
   };
-
 
 
   return (

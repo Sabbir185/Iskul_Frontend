@@ -5,9 +5,12 @@ import Link from 'next/link'
 import AdminLayout from '../../../layout/adminLayout';
 import Table from '../../../components/table/table';
 import { Spin } from 'antd';
+import { deleteSchool } from '../../../components/helper/delete';
+import { useRouter } from 'next/router';
 
 
 const SchoolViewAll = () => {
+    const router = useRouter()
     const [school, setSchool] = useState([]);
     const token = Cookies.get('token');
 
@@ -28,8 +31,12 @@ const SchoolViewAll = () => {
     const editHandler = () => {
 
     }
-    const deleteHandler = () => {
-
+    const deleteHandler = async (id) => {
+        const res = await deleteSchool(id)
+        if (res.status) {
+            alert(res.message)
+            router.push('/admin')
+        }
     }
 
     const column = [
@@ -46,7 +53,7 @@ const SchoolViewAll = () => {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
                 <div>
                     <button onClick={editHandler} className='editBtn mr-2 tracking-wide'>Edit</button>
-                    <button onClick={deleteHandler} className='deleteBtn ml-2 tracking-wide'>Delete</button>
+                    <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
                 </div>
             )
         },

@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const SearchContext = createContext();
+const SearchContext = createContext({searchResult: undefined});
 
 const SearchInputContext = (props) => {
-    const [searchResult, setSearchResult] = useState();
+    const [searchResult, setSearchResult] = useState([]);
 
     return (
-        <SearchContext.Provider value={[searchResult, setSearchResult] }>
+        <SearchContext.Provider value={{searchResult, setSearchResult}}>
             {props.children}
         </SearchContext.Provider>
     );

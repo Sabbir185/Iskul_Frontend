@@ -3,7 +3,7 @@ import AdminLayout from '../../../layout/adminLayout';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios'
 import Cookies from 'js-cookie';
-import {useRouter} from 'next/router'
+import { useRouter } from 'next/router'
 
 
 const Registration = () => {
@@ -16,7 +16,7 @@ const Registration = () => {
                 headers: { Authorization: `Bearer ${token}` }
             }
             const response = await axios.post(`http://localhost:8080/api/school/registration`, values, config)
-            if(response.data) {
+            if (response.data) {
                 alert("Registration Successfull!")
                 router.push('/admin')
             }
@@ -34,7 +34,7 @@ const Registration = () => {
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4'>Register New School</h1>
 
-            <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{width: '60%'}}>
+            <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{ width: '60%' }}>
                 <Form
                     initialValues={{
                         remember: true,
@@ -67,7 +67,7 @@ const Registration = () => {
                             },
                         ]}
                     >
-                        <Input type='number'/>
+                        <Input type='number' />
                     </Form.Item>
 
                     <Form.Item

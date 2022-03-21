@@ -5,9 +5,12 @@ import Link from 'next/link'
 import AdminLayout from '../../../layout/adminLayout';
 import Table from '../../../components/table/table';
 import { Spin } from 'antd';
+import { deleteUser } from '../../../components/helper/delete';
+import { useRouter } from 'next/router'
 
 
 const Student = () => {
+    const router = useRouter()
     const [student, setStudent] = useState([]);
     const token = Cookies.get('token');
 
@@ -29,10 +32,15 @@ const Student = () => {
     }, [token])
 
 
-    const editHandler = () => {
-
+    const deleteHandler = async (id) => {
+        const res = await deleteUser(id)
+        if (res.status) {
+            alert(res.message)
+            router.push('/admin')
+        }
     }
-    const deleteHandler = () => {
+
+    const editHandler = () => {
 
     }
 
@@ -47,14 +55,14 @@ const Student = () => {
         {
             dataField: '_id', headerName: 'Action', formatter: _id => (
                 <div>
-                    <button onClick={editHandler} className='editBtn mr-2 tracking-wide'>Edit</button>
-                    <button onClick={deleteHandler} className='deleteBtn ml-2 tracking-wide'>Delete</button>
+                    <button onClick={() => editHandler(_id)} className='editBtn mr-2 tracking-wide'>Edit</button>
+                    <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
                 </div>
             )
         },
     ]
 
-    if(student.length<1) {
+    if (student.length < 1) {
         return (
             <AdminLayout>
                 <div className='text-center mt-20'>
@@ -67,8 +75,8 @@ const Student = () => {
 
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-4'>Headmaster List</h1>
-            <Table data={student} columns={column} /> 
+            <h1 className='text-center font-semibold text-lg mt-4'>Student List</h1>
+            <Table data={student} columns={column} />
         </AdminLayout>
     );
 };
