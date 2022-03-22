@@ -1,32 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Upload, } from 'antd';
 import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useUser } from '../../contexts/userContext';
+import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/router'
 
 
 const InfoUpdateForm = ({ }) => {
+    const router = useRouter()
     const { user } = useUser()
     const { firstName, lastName, email } = user;
 
     const onFinish = async (values) => {
-        console.log(values)
-    };
+        try {
+            const token = await Cookies.get('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
 
-    const normFile = (e) => {
-        console.log('Upload event:', e);
+            const res = await axios.patch('http://localhost:8080/api/user/update-profile', values, config)
 
-        if (Array.isArray(e)) {
-            return e;
+            if (res.data.message === 'success') {
+                toast.success('Profile Updated Successfully!');
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2700);
+            }
+
+        } catch (error) {
+            toast.warning('Something went wrong! try again');
         }
-
-        return e && e.fileList;
     };
+
+
 
 
     return (
         <div className='m-auto bg-gray-50 rounded-lg p-10 shadow-md font-semibold w-11/12'>
+            <ToastContainer
+                position="top-center"
+                autoClose={2600}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <Form
                 initialValues={{
                     remember: true,
@@ -35,17 +58,6 @@ const InfoUpdateForm = ({ }) => {
                 autoComplete="off"
                 layout='vertical'
             >
-                {/* <Form.Item
-                    name="upload"
-                    label="Update Profile Image"
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                    extra="image size must less than 200 KB"
-                >
-                    <Upload name="image" listType="pictures">
-                        <Button icon={<UploadOutlined />}>Click to upload</Button>
-                    </Upload>
-                </Form.Item> */}
 
                 <Form.Item
                     label="First Name"

@@ -4,6 +4,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Edit = () => {
@@ -18,14 +19,19 @@ const Edit = () => {
                 headers: { Authorization: `Bearer ${token}` }
             }
             const response = await axios.patch(`http://localhost:8080/api/school/update/${schoolId}`, values, config)
+
             if (response.data) {
-                alert("Update Successful!")
-                router.push('/admin')
+                toast.success("Update Successful!");
+                setTimeout(() => {
+                    router.push('/admin')
+                }, 2700);
             }
+
         } catch (error) {
-            console.log(error)
+            toast.warning(error.response.data.message);
         }
     };
+
 
     useEffect(() => {
         const schoolGet = async () => {
@@ -58,21 +64,21 @@ const Edit = () => {
                         label="School Name"
                         name="schoolName"
                     >
-                        <Input placeholder={schoolData.schoolName}/>
+                        <Input placeholder={schoolData.schoolName} />
                     </Form.Item>
 
                     <Form.Item
                         label="Established Date"
                         name="established"
                     >
-                        <Input type='number' placeholder={schoolData.established}/>
+                        <Input type='number' placeholder={schoolData.established} />
                     </Form.Item>
 
                     <Form.Item
                         label="Email"
                         name="schoolEmail"
                     >
-                        <Input placeholder={schoolData.schoolEmail}/>
+                        <Input placeholder={schoolData.schoolEmail} />
                     </Form.Item>
 
                     <Button type="primary" htmlType="submit">
@@ -81,6 +87,18 @@ const Edit = () => {
 
                 </Form>
             </div>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={2500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </AdminLayout>
     );
 };

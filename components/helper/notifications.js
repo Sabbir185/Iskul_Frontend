@@ -1,12 +1,14 @@
-import { FaSnapchatGhost } from "react-icons/fa";
+import { FaRegBell } from "react-icons/fa";
+import { IoMegaphoneOutline } from "react-icons/io5";
+
 
 const Notifications = () => {
   return (
     <div
-      className="h-3 mr-8 cursor-pointer"
-      style={{ color: "goldenrod", fontSize: "23px" }}
+      className="h-3 mr-8 cursor-pointer text-cyan-600"
+      style={{fontSize: "23px" }}
     >
-      <FaSnapchatGhost />
+      <IoMegaphoneOutline />
     </div>
   );
 };

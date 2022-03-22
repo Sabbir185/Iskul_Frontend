@@ -43,11 +43,11 @@ const Profile = () => {
           />
         </div>
         {dropdown ? (
-          <button className="pl-1 inline-block text-lg">
+          <button className="pl-1 inline-block text-lg text-cyan-600">
             <AiFillCaretDown />
           </button>
         ) : (
-          <button className="pl-1 inline-block text-lg">
+          <button className="pl-1 inline-block text-lg text-cyan-600">
             <AiFillCaretUp />
           </button>
         )}

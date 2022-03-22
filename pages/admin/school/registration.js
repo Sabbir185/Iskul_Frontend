@@ -4,6 +4,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Registration = () => {
@@ -16,10 +17,14 @@ const Registration = () => {
                 headers: { Authorization: `Bearer ${token}` }
             }
             const response = await axios.post(`http://localhost:8080/api/school/registration`, values, config)
+
             if (response.data) {
-                alert("Registration Successfull!")
-                router.push('/admin')
+                toast.success('Registration Successfull!');
+                setTimeout(() => {
+                    router.push('/admin')
+                }, 2700);
             }
+
         } catch (error) {
             console.log(error)
         }
@@ -89,6 +94,18 @@ const Registration = () => {
 
                 </Form>
             </div>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={2500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </AdminLayout>
     );
 };

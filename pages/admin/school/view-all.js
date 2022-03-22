@@ -7,6 +7,7 @@ import Table from '../../../components/table/table';
 import { Spin } from 'antd';
 import { deleteSchool } from '../../../components/helper/delete';
 import { useRouter } from 'next/router';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const SchoolViewAll = () => {
@@ -35,8 +36,10 @@ const SchoolViewAll = () => {
     const deleteHandler = async (id) => {
         const res = await deleteSchool(id)
         if (res.status) {
-            alert(res.message)
-            router.push('/admin')
+            toast.success(res.message);
+            setTimeout(() => {
+                router.push('/admin')
+            }, 2700);
         }
     }
 
@@ -76,6 +79,18 @@ const SchoolViewAll = () => {
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>School List</h1>
             <Table data={school} columns={column} />
+
+            <ToastContainer
+                position="top-center"
+                autoClose={2600}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </AdminLayout>
     );
 };

@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineSafety, AiOutlineMail, AiOutlineContacts, AiOutlineUserAdd } from "react-icons/ai";
 import InfoUpdateForm from './updateForm';
 import Image from 'next/image';
 import avater from '../../public/images/avatar.png'
 import { BsCloudArrowUpFill } from "react-icons/bs";
+import { Modal, Button } from 'antd';
+import UploadPicture from '../modal/uploadPicture';
+import PasswordChange from '../modal/passwordChange';
 
 
 const UserProfileDetails = (props) => {
     const { createdAt, email, firstName, lastName, role, _id, image } = props.userData;
 
-    const imageHandler = () => {
-        alert("Wait bro... developer not ready")
-    }
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [profileImage, setProfileImage] = useState(false);
+
+    const showModal = (value) => {
+        if (value === 'image') {
+            setProfileImage(true)
+            setIsModalVisible(true);
+
+        } else {
+            setProfileImage(false)
+            setIsModalVisible(true);
+        }
+    };
+
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
 
     return (
@@ -22,8 +44,8 @@ const UserProfileDetails = (props) => {
                         <div className='w-40 border-2 rounded-full shadow-sm cursor-not-allowed'>
                             <Image src={avater} alt='profile-pic' className='shrink object-cover rounded-full' />
                         </div>
-                        <div className='absolute right-5 bottom-5' title='upload image' onClick={imageHandler}>
-                            <BsCloudArrowUpFill className='text-cyan-600 text-3xl hover:cursor-pointer hover:scale-110 transition'/>
+                        <div className='absolute right-5 bottom-5' title='upload image' onClick={() => showModal('image')}>
+                            <BsCloudArrowUpFill className='text-cyan-600 text-3xl hover:cursor-pointer hover:scale-110 transition' />
                         </div>
                     </div>
                     <div className='user-info bg-gray-50 mt-3 h-48 rounded-md'>
@@ -47,7 +69,7 @@ const UserProfileDetails = (props) => {
                         {/* <p>Class : {}</p> */}
                     </div>
                     <em>
-                        <p className='mt-3 p-2 bg-gray-50 rounded-md'>Change your password <a>Click here</a> </p>
+                        <p className='mt-3 p-2 bg-gray-50 rounded-md'>Change your password <a onClick={() => showModal('password')}>Click here</a> </p>
                     </em>
                 </div>
 
@@ -60,6 +82,15 @@ const UserProfileDetails = (props) => {
                     <InfoUpdateForm />
                 </div>
             </div>
+
+            <Modal title="Upload Picture" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                {
+                    profileImage ?
+                        <UploadPicture />
+                        :
+                        <PasswordChange />
+                }
+            </Modal>
         </section>
     );
 };
