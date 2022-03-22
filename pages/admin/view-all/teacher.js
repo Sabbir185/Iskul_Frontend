@@ -35,7 +35,7 @@ const Teacher = () => {
     const editHandler = (id) => {
         router.push(`/user/edit/${id}`)
     }
-
+    
     const deleteHandler = async (id) => {
         const res = await deleteUser(id)
         if (res.status) {
