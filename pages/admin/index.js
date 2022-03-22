@@ -8,6 +8,7 @@ import classes from './admin.module.css'
 import img1 from '../../public/images/1.jpg'
 import img2 from '../../public/images/2.jpg'
 import img3 from '../../public/images/3.jpg'
+import ChartView from '../../components/helper/chartView';
 
 
 const Admin = () => {
@@ -81,7 +82,7 @@ const Admin = () => {
                     <div className='bg-gray-50 w-auto h-52 mt-5 md:mt-10 mx-5 p-4'>
                         <h1 className='font-semibold text-cyan-500 text-xl font-bold'>Analysis</h1>
                         <div className=''>
-                           
+                           <ChartView />
                         </div>
                     </div>
 
