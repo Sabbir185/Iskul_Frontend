@@ -24,8 +24,8 @@ const Profile = () => {
   };
 
 
-  const profilePageHandler = (id) => {
-      router.push(`/profile/details/${id}`)
+  const profilePageHandler = () => {
+      router.push(`/profile/details`)
   }
 
 
@@ -75,7 +75,7 @@ const Profile = () => {
             </p>
           </div>
         </li>
-        <li className={`cursor-pointer ${classes.dropLink}`} onClick={()=> profilePageHandler(user._id)}>
+        <li className={`cursor-pointer ${classes.dropLink}`} onClick={()=> profilePageHandler()}>
           <p>Profile</p>
         </li>
 

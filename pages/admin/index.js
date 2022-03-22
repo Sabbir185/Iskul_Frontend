@@ -63,8 +63,8 @@ const Admin = () => {
     }, [])
 
 
-    const sch = schools.slice(0,8)
-    const tea = teachers.slice(0,8)
+    const sch = schools.slice(0,10)
+    const tea = teachers.slice(0,10)
 
 
     return (
@@ -80,7 +80,7 @@ const Admin = () => {
                     </div>
 
                     <div className='bg-gray-50 w-auto h-52 mt-5 md:mt-10 mx-5 p-4'>
-                        <h1 className='font-semibold text-cyan-500 text-xl font-bold'>Analysis</h1>
+                        <h1 className='font-semibold text-cyan-500 text-xl font-bold'>Salary</h1>
                         <div className=''>
                            <ChartView />
                         </div>

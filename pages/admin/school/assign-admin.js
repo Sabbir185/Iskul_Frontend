@@ -49,11 +49,12 @@ const AssignAdmin = () => {
     
     const schoolsData =  schools.slice(0,7);
 
-
+    // w-8/12
+    // style={{ width: '60%', height: 'auto' }}
     return (
         <AdminLayout>
-            <h1 className='text-center font-semibold text-lg mt-2 mb-2 text-green-600'>Assign admin for a school</h1>
-            <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold' style={{ width: '60%', height: 'auto' }}>
+            <h1 className='text-center py-2 font-semibold text-lg text-green-600'>Assign admin for a school</h1>
+            <div className='m-auto bg-green-200 rounded-lg p-10 shadow-md font-semibold md:w-3/5 h-auto'>
 
                 <Form onFinish={onFinish} layout='vertical'>
                     <Form.Item name="schoolId" label="Schools" rules={[{ required: true, message: 'Please Select a School' }]}>
@@ -69,7 +70,7 @@ const AssignAdmin = () => {
                         </Select>
                     </Form.Item>
 
-                    <div className='grid grid-cols-2 gap-1'>
+                    <div className='md:grid md:grid-cols-2 md:gap-1'>
                         <Form.Item
                             label="First Name"
                             name="firstName"
@@ -110,7 +111,7 @@ const AssignAdmin = () => {
                         <Input />
                     </Form.Item>
 
-                    <div className='grid grid-cols-2 gap-1'>
+                    <div className='md:grid md:grid-cols-2 md:gap-1'>
                         <Form.Item
                             label="Password"
                             name="password"
