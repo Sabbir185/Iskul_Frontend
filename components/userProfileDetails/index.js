@@ -26,14 +26,10 @@ const UserProfileDetails = (props) => {
         }
     };
 
-
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
     const handleCancel = () => {
         setIsModalVisible(false);
-    };
+    }
+
 
 
     return (
@@ -83,12 +79,12 @@ const UserProfileDetails = (props) => {
                 </div>
             </div>
 
-            <Modal title="Upload Picture" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title={profileImage?"Upload Picture":'Change Password'} visible={isModalVisible} onCancel={handleCancel} footer={null} width='30%'>
                 {
                     profileImage ?
-                        <UploadPicture />
+                        <UploadPicture setIsModalVisible={setIsModalVisible} />
                         :
-                        <PasswordChange />
+                        <PasswordChange setIsModalVisible={setIsModalVisible} />
                 }
             </Modal>
         </section>
