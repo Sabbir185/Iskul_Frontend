@@ -85,7 +85,7 @@ const UserProfileDetails = (props) => {
                 </div>
             </div>
 
-            <Modal title={profileImage ? "Upload Picture" : 'Change Password'} visible={isModalVisible} onCancel={handleCancel} footer={null} width='30%'>
+            <Modal title={profileImage ? "Upload Picture" : 'Change Password'} visible={isModalVisible} onCancel={handleCancel} footer={null} >
                 {
                     profileImage ?
                         <UploadPicture setIsModalVisible={setIsModalVisible} />

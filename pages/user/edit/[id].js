@@ -44,6 +44,8 @@ const Edit = () => {
         getOneUserData()
     }, [token, userId])
 
+    console.log(userData.role)
+
 
     return (
         <AdminLayout>
@@ -76,19 +78,22 @@ const Edit = () => {
                         <Input placeholder={userData.email}/>
                     </Form.Item>
 
-                    <div className='grid grid-cols-2 gap-1'>
+                    <div className={userData?.role === 'student' && 'grid grid-cols-2 gap-1'}>
                         <Form.Item
                             label="School ID"
                             name="schoolId"
                         >
                             <Input placeholder='School ID'/>
                         </Form.Item>
-                        <Form.Item
+                        {
+                            userData?.role === 'student' &&
+                           ( <Form.Item
                             label="Class"
                             name="currentClass"
-                        >
-                            <Input placeholder={userData.currentClass}/>
-                        </Form.Item>
+                            >
+                                <Input placeholder={userData.currentClass}/>
+                            </Form.Item>)
+                        }
                     </div>
 
                     <Form.Item name="role" label="Designation" rules={[{ required: true, message: 'Please Select Role' }]}>
