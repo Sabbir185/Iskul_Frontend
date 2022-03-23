@@ -16,8 +16,11 @@ export default function Home() {
 			} else if (user?.role === 'admin') {
 				router.push('/admin')
 
-			} else if (user?.role === 'school') {
+			} else if (user?.role === 'headmaster') {
 				router.push('/school')
+
+			} else if (user?.role === 'teacher') {
+				router.push('/teacher')
 			}
 		})
 	}, [])
