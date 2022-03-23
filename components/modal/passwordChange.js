@@ -19,7 +19,6 @@ const PasswordChange = ({ setIsModalVisible }) => {
             const res = await axios.patch('http://localhost:8080/api/user/change-password', values, config)
 
             if (res.data.status === true) {
-                // toast.success(res.data.message);
                 toast.success(res.data.message, {
                     position: "top-center",
                     autoClose: 2500,

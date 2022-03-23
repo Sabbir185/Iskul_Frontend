@@ -14,6 +14,7 @@ const Profile = () => {
   const router = useRouter();
   const { user, logout } = useUser();
   const [dropdown, setDropdown] = useState(true);
+  const imgUrl = `http://localhost:8080/${user.image}`
 
   const dropdownHandler = () => {
     if (dropdown) {
@@ -25,7 +26,7 @@ const Profile = () => {
 
 
   const profilePageHandler = () => {
-      router.push(`/profile/details`)
+    router.push(`/profile/details`)
   }
 
 
@@ -36,11 +37,19 @@ const Profile = () => {
         className="flex items-center justify-center pt-2 cursor-pointer pr-5"
       >
         <div className="h-9 w-9">
-          <Image
-            src={Avatar}
-            alt="default image"
-            className={`shrink-0 ${classes.profileImage}`}
-          />
+          {
+            user.image ?
+              <img
+                src={imgUrl}
+                alt="default image"
+                className={`shrink ${classes.profileImage} pb-4`}
+              />
+              :
+              <Image
+                src={Avatar}
+                alt="default image"
+                className={`shrink-0 ${classes.profileImage}`}
+              />}
         </div>
         {dropdown ? (
           <button className="pl-1 inline-block text-lg text-cyan-600">
@@ -60,11 +69,20 @@ const Profile = () => {
       >
         <li className="flex flex-row items-center mb-2">
           <div className="h-16 w-16 pr-1 mx-2">
-            <Image
-              src={Avatar}
-              alt="default image"
-              className={`shrink-0 ${classes.profileImage}`}
-            />
+            {
+              user.image ?
+                <img
+                  src={imgUrl}
+                  alt="default image"
+                  className={`shrink ${classes.profileImage} pb-2`}
+                />
+                :
+                <Image
+                  src={Avatar}
+                  alt="default image"
+                  className={`shrink-0 ${classes.profileImage}`}
+                />
+            }
           </div>
           <div className="text-center text-gray-700 w-full">
             <h3 className="border-l-2 border-green-500 font-bold tracking-wider">
@@ -75,7 +93,7 @@ const Profile = () => {
             </p>
           </div>
         </li>
-        <li className={`cursor-pointer ${classes.dropLink}`} onClick={()=> profilePageHandler()}>
+        <li className={`cursor-pointer ${classes.dropLink}`} onClick={() => profilePageHandler()}>
           <p>Profile</p>
         </li>
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import { AiOutlineSafety, AiOutlineMail, AiOutlineContacts, AiOutlineUserAdd } from "react-icons/ai";
 import InfoUpdateForm from './updateForm';
@@ -11,6 +12,7 @@ import PasswordChange from '../modal/passwordChange';
 
 const UserProfileDetails = (props) => {
     const { createdAt, email, firstName, lastName, role, _id, image } = props.userData;
+    const imgUrl = `http://localhost:8080/${image}`
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [profileImage, setProfileImage] = useState(false);
@@ -31,14 +33,18 @@ const UserProfileDetails = (props) => {
     }
 
 
-
     return (
         <section>
             <div className='bg-gray-200 h-full w-full md:grid md:grid-cols-3 md:gap-3 p-4 mt-3 rounded-lg'>
                 <div className='bg-gray-300 rounded-md h-full w-full p-3'>
                     <div className='image bg-gray-50 h-52 flex items-center justify-center rounded-md relative'>
                         <div className='w-40 border-2 rounded-full shadow-sm cursor-not-allowed'>
-                            <Image src={avater} alt='profile-pic' className='shrink object-cover rounded-full' />
+                            {
+                                image ?
+                                    <img src={imgUrl} alt='profile-pic' className='shrink object-cover rounded-full' />
+                                    :
+                                    <Image src={avater} alt='profile-pic' className='shrink object-cover rounded-full' />
+                            }
                         </div>
                         <div className='absolute right-5 bottom-5' title='upload image' onClick={() => showModal('image')}>
                             <BsCloudArrowUpFill className='text-cyan-600 text-3xl hover:cursor-pointer hover:scale-110 transition' />
@@ -79,7 +85,7 @@ const UserProfileDetails = (props) => {
                 </div>
             </div>
 
-            <Modal title={profileImage?"Upload Picture":'Change Password'} visible={isModalVisible} onCancel={handleCancel} footer={null} width='30%'>
+            <Modal title={profileImage ? "Upload Picture" : 'Change Password'} visible={isModalVisible} onCancel={handleCancel} footer={null} width='30%'>
                 {
                     profileImage ?
                         <UploadPicture setIsModalVisible={setIsModalVisible} />
