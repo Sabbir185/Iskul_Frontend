@@ -32,12 +32,12 @@ const HeadmasterSidebarData = [
 	},
 	{
 		title: "Teacher",
-		subtitle: [{ title: 'Add', link: 'a' }, { title: 'Search', link: 'a' }, { title: 'View All', link: 'a' }],
+		subtitle: [{ title: 'Add', link: 'school/teacher/add' }, { title: 'Search', link: 'school/teacher/search' }, { title: 'View All', link: 'school/teacher/view-all' }],
 		icon: ReadOutlined
 	},
 	{
 		title: "Student",
-		subtitle: [{ title: 'Add', link: 'student' }, { title: 'Search', link: 'a' }, { title: 'View All', link: 'student/view-all' }],
+		subtitle: [{ title: 'Add', link: 'school/student/add' }, { title: 'Search', link: 'school/student/search' }, { title: 'View All', link: 'school/student/view-all' }],
 		icon: TeamOutlined
 	},
 	{
