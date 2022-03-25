@@ -11,7 +11,7 @@ const deleteUser = async (id) => {
             }
             const response = await axios.delete(`http://localhost:8080/api/user/delete/${id}`, config);
 
-            if(response.data)
+            if (response.data)
                 return response.data;
 
         } catch (error) {
@@ -34,7 +34,50 @@ const deleteSchool = async (id) => {
             }
             const response = await axios.delete(`http://localhost:8080/api/school/delete/${id}`, config);
 
-            if(response.data)
+            if (response.data)
+                return response.data;
+
+        } catch (error) {
+            return error.response.data
+        }
+
+    } else {
+        return false
+    }
+}
+
+const deleteSubject = async (id) => {
+    console.log(id)
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const response = await axios.delete(`http://localhost:8080/api/subject/delete/${id}`, config);
+
+            if (response.data)
+                return response.data;
+
+        } catch (error) {
+            return error.response.data
+        }
+
+    } else {
+        return false
+    }
+}
+const deleteClass = async (id) => {
+    console.log(id)
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const response = await axios.delete(`http://localhost:8080/api/class/delete/${id}`, config);
+
+            if (response.data)
                 return response.data;
 
         } catch (error) {
@@ -47,4 +90,4 @@ const deleteSchool = async (id) => {
 }
 
 
-export { deleteUser, deleteSchool };
+export { deleteUser, deleteSchool, deleteSubject, deleteClass };

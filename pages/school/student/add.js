@@ -9,42 +9,48 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useUser } from '../../../contexts/userContext';
 
 
-const AddStudent = () => {
+const StudentAdd = () => {
     const router = useRouter();
     const [form] = Form.useForm();
-    const { user } = useUser()
+    const { user } = useUser();
 
     const onFinish = (values) => {
-        console.log(values)
-        // async function createStudent() {
-        //     try {
-        //         const token = await Cookies.get('token');
-        //         const config = {
-        //             headers: { Authorization: `Bearer ${token}` }
-        //         }
-        //         const response = await axios.post('http://localhost:8080/api/user/signup', values, config);
+        values.schoolId = user?.schoolId._id
+        async function createTeacher() {
+            try {
+                const token = await Cookies.get('token');
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+                const response = await axios.post('http://localhost:8080/api/user/signup', values, config);
 
-        //         if (response.data.status === true) {
-        //             toast.success('New Student Created Successfully!', {
-        //                 position: "top-center",
-        //                 autoClose: 2500,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 progress: undefined,
-        //             });
-        //             setTimeout(() => {
-        //                 router.push('/school/student/view-all')
-        //             }, 2700);
-        //         }
+                console.log(response.data.status)
 
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // }
-        // createStudent()
+                if (response.data.status === true) {
+                    toast.success('New Teacher Created Successfully!');
+                    setTimeout(() => {
+                        router.push('/school/teacher/view-all')
+                    }, 3000);
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        createTeacher()
     };
+
+
+    // to handle refresh error
+    // initialValue="" use for hard-coding assign value
+    useEffect(() => {
+        if (!!user) {
+            form.setFieldsValue({
+                schoolId: user?.schoolId?._id
+            })
+        }
+
+    }, [user])
 
 
 
@@ -73,6 +79,7 @@ const AddStudent = () => {
                                     message: 'Please Input First Name!',
                                 },
                             ]}
+
                         >
                             <Input />
                         </Form.Item>
@@ -99,7 +106,12 @@ const AddStudent = () => {
                                 required: true,
                                 message: 'Please Input Email!',
                             },
+                            {
+                                type: 'email',
+                                message: 'Incorrect email'
+                            }
                         ]}
+                        hasFeedback
                     >
                         <Input />
                     </Form.Item>
@@ -113,57 +125,42 @@ const AddStudent = () => {
                                     required: true,
                                     message: 'Please Input Valid Password!',
                                 },
+                                {
+                                    min: 6,
+                                    message: 'Please provide at least 6 characters'
+                                }
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
                         </Form.Item>
+
                         <Form.Item
                             label="Confirm Password"
                             name="confirmPassword"
+                            dependencies={["password"]}
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please Input Confirm Password!',
                                 },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue("password") === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject("Incorrect Password!")
+                                    }
+                                })
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
-                        </Form.Item>
-                    </div>
-
-                    <div className='grid grid-cols-2 gap-1'>
-                        <Form.Item
-                            label="School ID"
-                            name="schoolId"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please Input Confirm Password!',
-                                },
-                            ]}
-                        >
-                            <Input defaultValue={user?.schoolId._id} />
-                        </Form.Item>
-
-
-                        <Form.Item
-                            label="Class"
-                            name="currentClass"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please Input Class!',
-                                },
-                            ]}
-                        >
-                            <Input placeholder='Class' />
                         </Form.Item>
                     </div>
 
 
                     <Form.Item name="role" label="Designation" rules={[{ required: true, message: 'Please Select Role' }]}>
                         <Select placeholder="Select Role">
-                            <Option value='teacher'>Teacher</Option>
                             <Option value='student'>Student</Option>
                         </Select>
                     </Form.Item>
@@ -173,8 +170,20 @@ const AddStudent = () => {
                     </Button>
                 </Form>
             </div>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={1800}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </AdminLayout>
     );
 };
 
-export default AddStudent;
+export default StudentAdd;

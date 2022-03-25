@@ -15,36 +15,42 @@ const TeacherAdd = () => {
     const { user } = useUser()
 
     const onFinish = (values) => {
-        console.log(values)
-        // async function createTeacher() {
-        //     try {
-        //         const token = await Cookies.get('token');
-        //         const config = {
-        //             headers: { Authorization: `Bearer ${token}` }
-        //         }
-        //         const response = await axios.post('http://localhost:8080/api/user/signup', values, config);
+        values.schoolId = user?.schoolId._id
+        async function createTeacher() {
+            try {
+                const token = await Cookies.get('token');
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+                const response = await axios.post('http://localhost:8080/api/user/signup', values, config);
 
-        //         if (response.data.status === true) {
-        //             toast.success('New Teacher Created Successfully!', {
-        //                 position: "top-center",
-        //                 autoClose: 2500,
-        //                 hideProgressBar: false,
-        //                 closeOnClick: true,
-        //                 pauseOnHover: true,
-        //                 draggable: true,
-        //                 progress: undefined,
-        //             });
-        //             setTimeout(() => {
-        //                 router.push('/school/teacher/view-all')
-        //             }, 2700);
-        //         }
+                console.log(response.data.status)
 
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        // }
-        // createTeacher()
+                if (response.data.status === true) {
+                    toast.success('New Teacher Created Successfully!');
+                    setTimeout(() => {
+                        router.push('/school/teacher/view-all')
+                    }, 3000);
+                }
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        createTeacher()
     };
+
+
+    // to handle refresh error
+    // initialValue="" use for hard-coding assign value
+    useEffect(() => {
+        if (!!user) {
+            form.setFieldsValue({
+                schoolId: user?.schoolId?._id
+            })
+        }
+
+    }, [user])
 
 
 
@@ -73,6 +79,7 @@ const TeacherAdd = () => {
                                     message: 'Please Input First Name!',
                                 },
                             ]}
+
                         >
                             <Input />
                         </Form.Item>
@@ -99,7 +106,12 @@ const TeacherAdd = () => {
                                 required: true,
                                 message: 'Please Input Email!',
                             },
+                            {
+                                type: 'email',
+                                message: 'Incorrect email'
+                            }
                         ]}
+                        hasFeedback
                     >
                         <Input />
                     </Form.Item>
@@ -113,42 +125,43 @@ const TeacherAdd = () => {
                                     required: true,
                                     message: 'Please Input Valid Password!',
                                 },
+                                {
+                                    min: 6,
+                                    message: 'Please provide at least 6 characters'
+                                }
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
                         </Form.Item>
+
                         <Form.Item
                             label="Confirm Password"
                             name="confirmPassword"
+                            dependencies={["password"]}
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please Input Confirm Password!',
                                 },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue("password") === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject("Incorrect Password!")
+                                    }
+                                })
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
                         </Form.Item>
                     </div>
 
-                    <Form.Item
-                        label="School ID"
-                        name="schoolId"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please Input School ID!',
-                        },
-                    ]}
-                    >
-                        <Input defaultValue={user?.schoolId?._id} />
-                    </Form.Item>
-
 
                     <Form.Item name="role" label="Designation" rules={[{ required: true, message: 'Please Select Role' }]}>
                         <Select placeholder="Select Role">
                             <Option value='teacher'>Teacher</Option>
-                            <Option value='student'>Student</Option>
                         </Select>
                     </Form.Item>
 
@@ -157,6 +170,18 @@ const TeacherAdd = () => {
                     </Button>
                 </Form>
             </div>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={1800}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </AdminLayout>
     );
 };

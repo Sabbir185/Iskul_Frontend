@@ -27,7 +27,7 @@ const adminSidebarData = [
 const HeadmasterSidebarData = [
 	{
 		title: "Dashboard",
-		subtitle: [{ title: 'Create Class', link: 'admin/view-all' }, { title: 'Update Class', link: 'admin/view-all/teacher' }, { title: 'View Classes', link: 'admin/view-all/headmaster' }],
+		subtitle: [{ title: 'Add Subject', link: 'school/courses/add-subject' }, { title: 'Create Class', link: 'school/class/create-class' }, { title: 'View Classes', link: 'school/class/view-classes' }, { title: 'View Subjects', link: 'school/courses/view-all' }],
 		icon: AppstoreOutlined
 	},
 	{
