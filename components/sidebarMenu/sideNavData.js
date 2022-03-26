@@ -26,23 +26,23 @@ const adminSidebarData = [
 
 const HeadmasterSidebarData = [
 	{
-		title: "Dashboard",
+		title: "Class/Subject",
 		subtitle: [{ title: 'Add Subject', link: 'school/courses/add-subject' }, { title: 'Create Class', link: 'school/class/create-class' }, { title: 'View Classes', link: 'school/class/view-classes' }, { title: 'View Subjects', link: 'school/courses/view-all' }],
 		icon: AppstoreOutlined
 	},
 	{
 		title: "Teacher",
-		subtitle: [{ title: 'Add', link: 'school/teacher/add' }, { title: 'Search', link: 'school/teacher/search' }, { title: 'View All', link: 'school/teacher/view-all' }],
+		subtitle: [{ title: 'Add', link: 'school/teacher/add' }, { title: 'View All', link: 'school/teacher/view-all' }],
 		icon: ReadOutlined
 	},
 	{
 		title: "Student",
-		subtitle: [{ title: 'Add', link: 'school/student/add' }, { title: 'Search', link: 'school/student/search' }, { title: 'View All', link: 'school/student/view-all' }],
+		subtitle: [{ title: 'Add', link: 'school/student/add' }, { title: 'View All', link: 'school/student/view-all' }],
 		icon: TeamOutlined
 	},
 	{
 		title: "Notice",
-		subtitle: [{ title: 'Create', link: 'student' }, { title: 'Search', link: 'a' }, { title: 'View All', link: 'student/view-all' }],
+		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
 		icon: ScheduleOutlined
 	},
 	{

@@ -67,6 +67,8 @@ const deleteSubject = async (id) => {
         return false
     }
 }
+
+
 const deleteClass = async (id) => {
     console.log(id)
     const token = await Cookies.get('token');
@@ -90,4 +92,28 @@ const deleteClass = async (id) => {
 }
 
 
-export { deleteUser, deleteSchool, deleteSubject, deleteClass };
+
+const deleteNotice = async (id) => {
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const response = await axios.delete(`http://localhost:8080/api/notice/delete/${id}`, config);
+
+            if (response.data)
+                return response.data;
+
+        } catch (error) {
+            return error.response.data
+        }
+
+    } else {
+        return false
+    }
+}
+
+
+
+export { deleteUser, deleteSchool, deleteSubject, deleteClass, deleteNotice };
