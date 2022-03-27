@@ -103,7 +103,7 @@ const UpdateClass = () => {
 
                     <Form onFinish={onFinish} layout='vertical'>
                         <Form.Item
-                            label="Group Name"
+                            label="Class Name"
                             name="name"
                         >
                             <Input placeholder={subjectName} />

@@ -54,4 +54,58 @@ const HeadmasterSidebarData = [
 
 
 
-export { adminSidebarData, HeadmasterSidebarData };
+const TeacherSidebarData = [
+	{
+		title: "Manage Routine",
+		subtitle: [{ title: 'Assigned Class', link: 'teacher/assigned-class' }, { title: 'Routine', link: 'teacher/routine' }],
+		icon: AppstoreOutlined
+	},
+	{
+		title: "Teacher",
+		subtitle: [{ title: 'Add', link: 'school/teacher/add' }, { title: 'View All', link: 'school/teacher/view-all' }],
+		icon: ReadOutlined
+	},
+	{
+		title: "Student",
+		subtitle: [{ title: 'Add', link: 'school/student/add' }, { title: 'View All', link: 'school/student/view-all' }],
+		icon: TeamOutlined
+	},
+	{
+		title: "Notice",
+		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
+		icon: ScheduleOutlined
+	},
+	{
+		title: "About",
+		subtitle: [{ title: 'About School', link: 'school/about' }],
+		icon: SafetyCertificateOutlined
+	},
+];
+
+
+const StudentSidebarData = [
+	{
+		title: "Show Routine",
+		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
+		icon: AppstoreOutlined
+	},
+	{
+		title: "Notice Board",
+		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
+		icon: ScheduleOutlined
+	},
+	{
+		title: "About",
+		subtitle: [{ title: 'About School', link: 'school/about' }],
+		icon: SafetyCertificateOutlined
+	},
+];
+
+
+
+export { 
+	adminSidebarData, 
+	HeadmasterSidebarData, 
+	TeacherSidebarData, 
+	StudentSidebarData 
+};

@@ -100,7 +100,7 @@ const ViewAllStudent = () => {
 
     return (
         <AdminLayout>
-            <div className='bg-slate-100 h-screen rounded-md pt-3 m-0'>
+            <div className='bg-slate-200 h-screen rounded-md pt-3 m-0'>
                 <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Quick Search</h1>
 
                 <UserSearch />
