@@ -115,5 +115,34 @@ const deleteNotice = async (id) => {
 }
 
 
+const deleteRoutine = async (id) => {
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const response = await axios.delete(`http://localhost:8080/api/routine/delete/${id}`, config);
 
-export { deleteUser, deleteSchool, deleteSubject, deleteClass, deleteNotice };
+            if (response.data)
+                return response.data;
+
+        } catch (error) {
+            return error.response.data
+        }
+
+    } else {
+        return false
+    }
+}
+
+
+
+export { 
+    deleteUser, 
+    deleteSchool, 
+    deleteSubject, 
+    deleteClass, 
+    deleteNotice,
+    deleteRoutine
+ };
