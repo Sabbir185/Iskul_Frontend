@@ -30,21 +30,24 @@ const CreateClass = () => {
 
     // fetching all teacher
     useEffect(() => {
-        async function teachersData() {
-            const token = await Cookies.get('token');
-            const config = {
-                headers: { 'Authorization': `Bearer ${token}` }
-            }
-            try {
-                const res = await axios.get('http://localhost:8080/api/user/get-filtered-data?role=teacher', config);
-                setTeachers(res.data.data)
+        const schoolId = user?.schoolId?._id;
+        if (!!schoolId) {
+            async function teachersData() {
+                const token = await Cookies.get('token');
+                const config = {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }
+                try {
+                    const res = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=teacher&schoolId=${schoolId}`, config, token);
+                    setTeachers(res.data.data)
 
-            } catch (error) {
-                alert(error.response.data.message)
+                } catch (error) {
+                    alert(error.response.data.message)
+                }
             }
+            teachersData()
         }
-        teachersData()
-    }, [])
+    }, [user])
 
 
     // create class
@@ -68,7 +71,7 @@ const CreateClass = () => {
             } catch (error) {
                 if (error.response.data.message) {
                     message.error(error.response.data.message);
-    
+
                 } else {
                     message.warning("Failed, maybe you're not authorized!");
                 }
@@ -100,7 +103,7 @@ const CreateClass = () => {
 
                     <Form onFinish={onFinish} layout='vertical'>
                         <Form.Item
-                            label="Group Name"
+                            label="Class Name"
                             name="name"
                             rules={[
                                 {

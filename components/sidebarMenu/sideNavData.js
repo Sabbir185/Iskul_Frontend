@@ -61,13 +61,8 @@ const TeacherSidebarData = [
 		icon: AppstoreOutlined
 	},
 	{
-		title: "Teacher",
-		subtitle: [{ title: 'Add', link: 'school/teacher/add' }, { title: 'View All', link: 'school/teacher/view-all' }],
-		icon: ReadOutlined
-	},
-	{
 		title: "Student",
-		subtitle: [{ title: 'Add', link: 'school/student/add' }, { title: 'View All', link: 'school/student/view-all' }],
+		subtitle: [{ title: 'Add', link: 'teacher/student/add' }, { title: 'View All', link: 'teacher/student/view-all' }],
 		icon: TeamOutlined
 	},
 	{

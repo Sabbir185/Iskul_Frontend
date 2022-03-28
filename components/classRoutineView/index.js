@@ -54,7 +54,6 @@ const ClassRoutineView = ({ id }) => {
         const res = await deleteRoutine(id)
         if (res.status) {
             message.success(res.message)
-            router.push('/teacher')
         }
     }
 
