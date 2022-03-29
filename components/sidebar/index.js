@@ -1,12 +1,12 @@
-import React from "react";
-import logo2 from "../../public/images/logo2.png";
-import logo11 from "../../public/images/logo11.png";
-import logo22 from "../../public/images/logo22.png";
 import Image from "next/image";
-import SidebarNav from "../sidebarMenu/sidebarNav";
-import { adminSidebarData, HeadmasterSidebarData } from "../sidebarMenu/sideNavData";
+import { useRouter } from 'next/router';
+import React from "react";
 import { useUser } from "../../contexts/userContext";
-import { useRouter } from 'next/router'
+import logo11 from "../../public/images/logo11.png";
+import logo2 from "../../public/images/logo2.png";
+import studentLogo from "../../public/images/studentLogo.jpg";
+import SidebarNav from "../sidebarMenu/sidebarNav";
+import { adminSidebarData, HeadmasterSidebarData, StudentSidebarData } from "../sidebarMenu/sideNavData";
 
 
 const SideMenu = () => {
@@ -16,9 +16,10 @@ const SideMenu = () => {
 	const homePageHandle = () => {
 		if (user.role === 'admin') {
 			router.push('/admin')
-
 		} else if (user.role === 'headmaster') {
 			router.push('/school')
+		}else if (user.role === 'student') {
+			router.push('/student')
 		}
 	}
 
@@ -46,6 +47,14 @@ const SideMenu = () => {
 				</div>
 			}
 
+			{/* Student logo section */}
+			{
+				user?.role === 'student' &&
+				<div className="w-52 flex items-center justify-center relative logo-img mt-5 border-b-2 border-gray-400 pb-5 " >
+					<Image className="shrink cursor-pointer rounded-full" src={studentLogo} alt="logo" onClick={homePageHandle} width={150} height={150}/>
+				</div>
+			}
+
 
 			<div className="mt-8 w-60 h-auto px-6">
 				{/* Admin Nav Menu section */}
@@ -58,6 +67,10 @@ const SideMenu = () => {
 				{
 					user?.role === 'headmaster' &&
 					HeadmasterSidebarData?.map((info, i, a) => <SidebarNav key={i} data={info} />)
+				}
+				{
+					user?.role === 'student' &&
+					StudentSidebarData?.map((info, i, a) => <SidebarNav key={i} data={info} />)
 				}
 			</div>
 		</section>
