@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 
 
 const UpdateRoutine = ({ id, handleCancel, routineData }) => {
+    const [form] = Form.useForm();
     const router = useRouter()
     // update or post data
     const handleSubmit = async (values) => {
@@ -18,7 +19,7 @@ const UpdateRoutine = ({ id, handleCancel, routineData }) => {
             day1_time, day2_time
         }
 
-        
+
         if (!!id) {
             try {
                 const token = await Cookies.get('token');
@@ -43,16 +44,26 @@ const UpdateRoutine = ({ id, handleCancel, routineData }) => {
     }
 
 
-    const [day1, time1] = routineData[0].day1_time
-    const [day2, time2] = routineData[0].day2_time
+    useEffect(() => {
+        if (!!routineData) {
+            form.setFieldsValue({
+                day1: routineData?.day1_time[0],
+                class_time1: routineData?.day1_time[1],
+
+                day2: routineData?.day2_time[0],
+                class_time2: routineData?.day2_time[1],
+            })
+        }
+
+    }, [routineData])
 
 
     return (
         <div>
 
-            <Form onFinish={handleSubmit} layout='vertical'>
+            <Form form={form} onFinish={handleSubmit} layout='vertical'>
                 <div className='md:grid md:grid-cols-2 md:gap-2'>
-                    <Form.Item name="day1" label="Select Day1" hasFeedback initialValue={day1}>
+                    <Form.Item name="day1" label="Select Day1" hasFeedback >
                         <Select style={{ width: '100%' }}>
                             <Option value='Saturday'>Saturday</Option>
                             <Option value='Sunday'>Sunday</Option>
@@ -63,7 +74,7 @@ const UpdateRoutine = ({ id, handleCancel, routineData }) => {
                         </Select>
                     </Form.Item>
 
-                    <Form.Item name="day2" label="Select Day2" hasFeedback initialValue={day2}>
+                    <Form.Item name="day2" label="Select Day2" hasFeedback>
                         <Select style={{ width: '100%' }}>
                             <Option value='Saturday'>Saturday</Option>
                             <Option value='Sunday'>Sunday</Option>
@@ -76,7 +87,7 @@ const UpdateRoutine = ({ id, handleCancel, routineData }) => {
                 </div>
 
                 <div className='md:grid md:grid-cols-2 md:gap-2'>
-                    <Form.Item name="class_time1" label="Day1 Time" hasFeedback initialValue={time1}>
+                    <Form.Item name="class_time1" label="Day1 Time" hasFeedback >
                         <Select>
                             <Option value='09:00 AM'>09:00 AM</Option>
                             <Option value='10.30 AM'>10.30 AM</Option>
@@ -86,7 +97,7 @@ const UpdateRoutine = ({ id, handleCancel, routineData }) => {
                         </Select>
                     </Form.Item>
 
-                    <Form.Item name="class_time2" label="Day2 Time" hasFeedback initialValue={time2}>
+                    <Form.Item name="class_time2" label="Day2 Time" hasFeedback >
                         <Select>
                             <Option value='09:00 AM'>09:00 AM</Option>
                             <Option value='10.30 AM'>10.30 AM</Option>

@@ -110,7 +110,7 @@ const AddStudentInClass = () => {
             }
             const res = await axios.patch(`http://localhost:8080/api/class/update-classinfo-forstudent/${classID}`, data, config)
 
-            if(res.data.status===true) {
+            if (res.data.status === true) {
                 message.success(res.data.message)
                 setTimeout(() => {
                     router.push('/teacher/student/view-all')
@@ -120,8 +120,8 @@ const AddStudentInClass = () => {
         } catch (error) {
             if (error.response.data.message)
                 message.error(error.response.data.message)
-
-            message.error(error.message)
+            else
+                 message.error(error.message)
         }
     }
 
@@ -145,7 +145,7 @@ const AddStudentInClass = () => {
                 </div>
 
                 {/* student information and class select  */}
-                <div className={student === null ? `hidden` : `bg-slate-200 mt-8 mx-10 rounded-md shadow-md`}>
+                <div className={student?.length ? `bg-slate-200 mt-8 mx-10 rounded-md shadow-md` : `hidden`}>
                     <Table data={student} columns={column} />
 
                     <div className='mx-11 p-5'>

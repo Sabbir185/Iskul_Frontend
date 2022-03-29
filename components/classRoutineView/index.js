@@ -88,7 +88,9 @@ const ClassRoutineView = ({ id }) => {
             )
         },
     ]
+    
 
+    const filteredRoutineData = routines.find(el => el._id === routineID)
 
     return (
         <div>
@@ -96,7 +98,7 @@ const ClassRoutineView = ({ id }) => {
 
             {/* update class routine */}
             <Modal title="Update Class Routine" visible={isModalVisible} onCancel={handleCancel} footer={null}>
-                <UpdateRoutine id={routineID} handleCancel={handleCancel} routineData={routines}/>
+                <UpdateRoutine id={routineID} handleCancel={handleCancel} routineData={filteredRoutineData}/>
             </Modal>
         </div>
     );
