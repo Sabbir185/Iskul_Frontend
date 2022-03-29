@@ -81,12 +81,12 @@ const TeacherSidebarData = [
 const StudentSidebarData = [
 	{
 		title: "Show Routine",
-		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
+		subtitle: [{ title: 'Class Routine', link: 'student/class-routine' }],
 		icon: AppstoreOutlined
 	},
 	{
 		title: "Notice Board",
-		subtitle: [{ title: 'Create', link: 'school/notice/create-notice' }, { title: 'View All', link: 'school/notice/view-all' }],
+		subtitle: [{ title: 'View All', link: 'school/notice/view-all' }],
 		icon: ScheduleOutlined
 	},
 	{

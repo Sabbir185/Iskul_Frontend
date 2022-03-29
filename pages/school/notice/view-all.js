@@ -66,9 +66,9 @@ const ViewAllNotice = () => {
         },
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
-                <div className='grid grid-cols-2 gap-1 place-content-center'>
+                <div className={user?.role === 'student'? 'grid grid-cols-1 place-content-center' :'grid grid-cols-2 gap-1 place-content-center'}>
                     <p onClick={() => downloadHandler(data.file)} className='block text-xl text-green-500 cursor-pointer font-bold' title='download'> <CloudDownloadOutlined /> </p>
-                    <p onClick={() => deleteHandler(_id)} className='block font-bold text-xl text-red-500 cursor-pointer' title="delete"><DeleteOutlined /></p>
+                    <p onClick={() => deleteHandler(_id)} className={user?.role === 'student'? 'hidden': 'block font-bold text-xl text-red-500 cursor-pointer'} title="delete"><DeleteOutlined /></p>
                 </div>
             )
         },
