@@ -137,6 +137,31 @@ const deleteRoutine = async (id) => {
 }
 
 
+const deleteStudentFromClass = async (clsId, stdId) => {
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const data = {
+                students: stdId
+            }
+            const response = await axios.patch(`http://localhost:8080/api/class/delete-student-from-class/${clsId}`, data, config);
+
+            if (response.data)
+                return response.data;
+
+        } catch (error) {
+            return error.response.data
+        }
+
+    } else {
+        return false
+    }
+}
+
+
 
 export { 
     deleteUser, 
@@ -144,5 +169,6 @@ export {
     deleteSubject, 
     deleteClass, 
     deleteNotice,
-    deleteRoutine
+    deleteRoutine,
+    deleteStudentFromClass
  };
