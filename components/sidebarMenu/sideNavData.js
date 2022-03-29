@@ -1,11 +1,6 @@
 import {
-	AppstoreOutlined,
-	SettingOutlined,
-	HomeOutlined,
-	ReadOutlined,
-	TeamOutlined,
-	SafetyCertificateOutlined,
-	ScheduleOutlined
+	AppstoreOutlined, AuditOutlined, BookOutlined, FundOutlined, NotificationOutlined, ReadOutlined, SafetyCertificateOutlined,
+	ScheduleOutlined, TeamOutlined
 } from "@ant-design/icons";
 
 
@@ -53,5 +48,31 @@ const HeadmasterSidebarData = [
 ];
 
 
+// Student Side bar Data
+const StudentSidebarData = [
+	{
+		title: "Classes",
+		subtitle: [{ title: 'View Classes', link: 'student/classes/view-classes' }],
+		icon: BookOutlined 
+	},
+	{
+		title: "Routine",
+		subtitle: [{ title: 'Class Routine', link: 'student/routine/view-routine' }],
+		icon: FundOutlined
+	},
+	{
+		title: "Teachers",
+		subtitle: [{ title: 'Course Teachers', link: 'student/teachers/course-teachers' }],
+		icon: AuditOutlined
+	},
+	{
+		title: "Notice",
+		subtitle: [{ title: 'All Notice', link: 'student/notice/view-notice' }],
+		icon: NotificationOutlined
+	}
+];
 
-export { adminSidebarData, HeadmasterSidebarData };
+
+
+export { adminSidebarData, HeadmasterSidebarData, StudentSidebarData };
+
