@@ -6,7 +6,7 @@ import React from 'react';
 const Table = ({ data, columns }) => {
 
     return (
-        <div className='mx-16 h-full overflow-auto'>
+        <div className='h-full overflow-auto'>
             <table className='table-auto border-collapse border border-slate-500 w-full test-center tableContainer mt-5'>
                 <thead>
                     <tr>

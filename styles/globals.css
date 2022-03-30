@@ -78,3 +78,11 @@
 .logo-img {
   width: 70% !important;
 }
+
+
+
+.required-marker:after {
+  content:" *";
+  color: red;
+}
+

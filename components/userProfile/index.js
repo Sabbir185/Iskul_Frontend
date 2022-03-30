@@ -38,7 +38,7 @@ const Profile = () => {
       >
         <div className="h-9 w-9">
           {
-            user.image ?
+            user?.image !== "avatar.png" ?
               <img
                 src={imgUrl}
                 alt="default image"
@@ -70,7 +70,7 @@ const Profile = () => {
         <li className="flex flex-row items-center mb-2">
           <div className="h-16 w-16 pr-1 mx-2">
             {
-              user.image ?
+              user?.image !== "avatar.png" ?
                 <img
                   src={imgUrl}
                   alt="default image"

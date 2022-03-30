@@ -8,9 +8,12 @@ import { useRouter } from 'next/router'
 import { useUser } from '../../../contexts/userContext';
 
 
-const CreateClass = () => {
+const UpdateClass = () => {
     const { user } = useUser();
     const router = useRouter();
+    const subjectName = router.query.slug[0];
+    const classID = router.query.slug[1];
+
     const [subjects, setSubjects] = useState([]);
     const [teachers, setTeachers] = useState([]);
 
@@ -30,39 +33,36 @@ const CreateClass = () => {
 
     // fetching all teacher
     useEffect(() => {
-        const schoolId = user?.schoolId?._id;
-        if (!!schoolId) {
-            async function teachersData() {
-                const token = await Cookies.get('token');
-                const config = {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                }
-                try {
-                    const res = await axios.get(`http://localhost:8080/api/user/get-filtered-data?role=teacher&schoolId=${schoolId}`, config, token);
-                    setTeachers(res.data.data)
-
-                } catch (error) {
-                    alert(error.response.data.message)
-                }
+        async function teachersData() {
+            const token = await Cookies.get('token');
+            const config = {
+                headers: { 'Authorization': `Bearer ${token}` }
             }
-            teachersData()
+            try {
+                const res = await axios.get('http://localhost:8080/api/user/get-filtered-data?role=teacher', config);
+                setTeachers(res.data.data)
+
+            } catch (error) {
+                alert(error.response.data.message)
+            }
         }
-    }, [user])
+        teachersData()
+    }, [])
 
 
-    // create class
+    // update class
     const onFinish = (values) => {
-        values.school = user.schoolId._id;
+        console.log(values)
         async function createClass() {
             try {
                 const token = await Cookies.get('token');
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 }
-                const response = await axios.post('http://localhost:8080/api/class/create', values, config);
+                const response = await axios.patch(`http://localhost:8080/api/class/update/${classID}`, values, config);
 
                 if (response.data.status === true) {
-                    message.success('New Class Created Successfully!');
+                    message.success(response.data.message);
                     setTimeout(() => {
                         router.push('/school/class/view-classes')
                     }, 2000);
@@ -71,7 +71,7 @@ const CreateClass = () => {
             } catch (error) {
                 if (error.response.data.message) {
                     message.error(error.response.data.message);
-
+    
                 } else {
                     message.warning("Failed, maybe you're not authorized!");
                 }
@@ -98,24 +98,18 @@ const CreateClass = () => {
     return (
         <AdminLayout>
             <div className='bg-slate-300 h-screen p-0 m-0'>
-                <h1 className='text-center py-2 font-semibold text-lg text-cyan-800'>Create New Class</h1>
+                <h1 className='text-center py-2 font-semibold text-lg text-cyan-800'>Update Class</h1>
                 <div className='m-auto bg-slate-200 rounded-lg p-10 shadow-lg font-semibold md:w-3/5 h-auto'>
 
                     <Form onFinish={onFinish} layout='vertical'>
                         <Form.Item
                             label="Class Name"
                             name="name"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please Input Department Name!',
-                                },
-                            ]}
                         >
-                            <Input placeholder='Name' />
+                            <Input placeholder={subjectName} />
                         </Form.Item>
 
-                        <Form.Item name="subjects" label="Select Subjects" rules={[{ required: true, message: 'Please Select subjects' }]}>
+                        <Form.Item name="subjects" label="Select Subjects">
 
                             <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='Subjects'>
                                 {subjectSelectedData}
@@ -123,7 +117,7 @@ const CreateClass = () => {
 
                         </Form.Item>
 
-                        <Form.Item name="teachers" label="Select Teachers" rules={[{ required: true, message: 'Please Select teachers' }]}>
+                        <Form.Item name="teachers" label="Select Teachers" >
 
                             <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='Teachers'>
                                 {teacherSelectedData}
@@ -132,7 +126,7 @@ const CreateClass = () => {
                         </Form.Item>
 
                         <Button type="primary" htmlType="submit">
-                            Create
+                            Update
                         </Button>
                     </Form>
                 </div>
@@ -141,4 +135,4 @@ const CreateClass = () => {
     );
 };
 
-export default CreateClass;
+export default UpdateClass;

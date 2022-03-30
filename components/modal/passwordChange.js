@@ -27,7 +27,7 @@ const PasswordChange = ({ setIsModalVisible }) => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
+                });
                 setTimeout(() => {
                     setIsModalVisible(false)   // for modal close
                     form.resetFields()
@@ -72,7 +72,12 @@ const PasswordChange = ({ setIsModalVisible }) => {
                             required: true,
                             message: 'Please Input Password!',
                         },
+                        {
+                            min: 6,
+                            message: "Minimum 6 character needed!"
+                        }
                     ]}
+                    hasFeedback
                 >
                     <Input.Password placeholder='Password' />
                 </Form.Item>
@@ -80,12 +85,22 @@ const PasswordChange = ({ setIsModalVisible }) => {
                 <Form.Item
                     label="Confirm Password"
                     name="confirmPassword"
+                    dependencies={["password"]}
                     rules={[
                         {
                             required: true,
                             message: 'Please Input Confirm Password!',
                         },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue("password") === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject("Incorrect Password!")
+                            }
+                        })
                     ]}
+                    hasFeedback
                 >
                     <Input.Password placeholder='Enter password again' />
                 </Form.Item>

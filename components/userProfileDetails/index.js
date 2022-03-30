@@ -40,7 +40,7 @@ const UserProfileDetails = (props) => {
                     <div className='image bg-gray-50 h-52 flex items-center justify-center rounded-md relative'>
                         <div className='w-40 border-2 rounded-full shadow-sm cursor-not-allowed'>
                             {
-                                image ?
+                                image !== 'avatar.png' ?
                                     <img src={imgUrl} alt='profile-pic' className='shrink object-cover rounded-full' />
                                     :
                                     <Image src={avater} alt='profile-pic' className='shrink object-cover rounded-full' />

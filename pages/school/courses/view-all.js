@@ -8,28 +8,36 @@ import { Spin } from 'antd';
 import { deleteSubject } from '../../../components/helper/delete';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
+import { useUser } from '../../../contexts/userContext'
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 
 const ViewAllCourses = () => {
+    const { user } = useUser();
     const router = useRouter()
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const result = await axios.get(`http://localhost:8080/api/subject/get-all`);
-                setCourses(result.data.subjects);
+        if (!!user) {
+            async function getData() {
+                const id = user?.schoolId?._id;
+                if (!!id) {
+                    try {
+                        const result = await axios.get(`http://localhost:8080/api/subject/filtered-subject/${id}`);
+                        setCourses(result.data.subjects);
 
-            } catch (error) {
-                message.error("Something Wrong!");
+                    } catch (error) {
+                        message.error("Something Wrong!");
+                    }
+                }
             }
+            getData()
         }
-        getData()
-    }, [])
+    }, [user])
 
 
-    const editHandler = (id) => {
-        router.push(`/school/courses/${id}`)
+    const editHandler = (subName, code, id) => {
+        router.push(`/school/courses/${subName}/${code}/${id}`)
     }
 
     const deleteHandler = async (id) => {
@@ -53,25 +61,14 @@ const ViewAllCourses = () => {
         },
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
-                <div>
-                    <button onClick={()=>editHandler(_id)} className='editBtn mr-2 tracking-wide'>Edit</button>
-                    <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
+                <div className='flex items-center justify-evenly'>
+                    <p onClick={() => editHandler(data.name, data.code, _id)} className='text-cyan-600 cursor-pointer' title="Edit"><FaEdit/></p>
+                    <p onClick={() => deleteHandler(_id)} className='text-red-600 cursor-pointer' title="Delete"><FaTrashAlt/></p>
                 </div>
             )
         },
     ]
 
-
-    if (courses.length < 1) {
-        return (
-            <AdminLayout>
-                <div className='text-center mt-20'>
-                    <Spin tip="Loading..." size="large">
-                    </Spin>
-                </div>
-            </AdminLayout>
-        )
-    }
 
     return (
         <AdminLayout>

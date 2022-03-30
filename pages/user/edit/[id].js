@@ -29,22 +29,22 @@ const Edit = () => {
     };
 
     useEffect(() => {
-        const getOneUserData = async () => {
-            try {
-                const config = {
-                    headers: { Authorization: `Bearer ${token}` }
+        if (!!userId) {
+            const getOneUserData = async () => {
+                try {
+                    const config = {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }
+                    const response = await axios.get(`http://localhost:8080/api/user/get-user-by-id/${userId}`, config);
+                    setUserData(response.data.data)
+
+                } catch (error) {
+                    console.log(error.response.data)
                 }
-                const response = await axios.get(`http://localhost:8080/api/user/get-user-by-id/${userId}`, config);
-                setUserData(response.data.data)
-
-            } catch (error) {
-                console.log(error.response.data)
             }
+            getOneUserData()
         }
-        getOneUserData()
     }, [token, userId])
-
-    console.log(userData.role)
 
 
     return (
@@ -60,14 +60,14 @@ const Edit = () => {
                             label="First Name"
                             name="firstName"
                         >
-                            <Input placeholder={userData.firstName}/>
+                            <Input placeholder={userData.firstName} />
                         </Form.Item>
 
                         <Form.Item
                             label="Last Name"
                             name="lastName"
                         >
-                            <Input placeholder={userData.lastName}/>
+                            <Input placeholder={userData.lastName} />
                         </Form.Item>
                     </div>
 
@@ -75,7 +75,7 @@ const Edit = () => {
                         label="Email"
                         name="email"
                     >
-                        <Input placeholder={userData.email}/>
+                        <Input placeholder={userData.email} />
                     </Form.Item>
 
                     <div className={userData?.role === 'student' && 'grid grid-cols-2 gap-1'}>
@@ -83,15 +83,15 @@ const Edit = () => {
                             label="School ID"
                             name="schoolId"
                         >
-                            <Input placeholder='School ID'/>
+                            <Input placeholder='School ID' />
                         </Form.Item>
                         {
                             userData?.role === 'student' &&
-                           ( <Form.Item
-                            label="Class"
-                            name="currentClass"
+                            (<Form.Item
+                                label="Class"
+                                name="currentClass"
                             >
-                                <Input placeholder={userData.currentClass}/>
+                                <Input placeholder={userData.currentClass} />
                             </Form.Item>)
                         }
                     </div>

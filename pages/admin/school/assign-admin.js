@@ -109,7 +109,12 @@ const AssignAdmin = () => {
                                 required: true,
                                 message: 'Please Input Email!',
                             },
+                            {
+                                type: 'email',
+                                message: 'Invalid email!'
+                            }
                         ]}
+                        hasFeedback
                     >
                         <Input />
                     </Form.Item>
@@ -123,19 +128,34 @@ const AssignAdmin = () => {
                                     required: true,
                                     message: 'Please Input Valid Password!',
                                 },
+                                {
+                                    min: 6,
+                                    message: 'Minimum 6 character needed'
+                                }
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
                         </Form.Item>
                         <Form.Item
                             label="Confirm Password"
                             name="confirmPassword"
+                            dependencies={["password"]}
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please Input Confirm Password!',
                                 },
+                                ({ getFieldValue }) => ({
+                                    validator(_, value) {
+                                        if (!value || getFieldValue("password") === value) {
+                                            return Promise.resolve();
+                                        }
+                                        return Promise.reject("Incorrect Password!")
+                                    }
+                                })
+                              
                             ]}
+                            hasFeedback
                         >
                             <Input.Password />
                         </Form.Item>
@@ -148,7 +168,7 @@ const AssignAdmin = () => {
                     </Form.Item>
 
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        Set Admin
                     </Button>
                 </Form>
             </div>
