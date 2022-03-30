@@ -40,7 +40,7 @@ const InputForm = () => {
     >
       <input
         type="text"
-        placeholder="search..."
+        placeholder="update school"
         className="w-auto py-1 pl-4 transform duration-200 focus:pr-8 focus:pl-3 focus:py-1 focus:ring-cyan-500 outline-none text-gray-500 focus:font-semibold"
         onChange={inputHandler}
       />

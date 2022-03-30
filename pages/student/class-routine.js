@@ -16,21 +16,24 @@ const ClassRoutine = () => {
     // get class id by user id
     useEffect(() => {
         if (!!user) {
-            async function findClassId() {
-                const token = await Cookies.get('token');
-                const config = {
-                    headers: { Authorization: `Bearer ${token}` }
+            const id = user?._id;
+            if (!!id) {
+                async function findClassId() {
+                    const token = await Cookies.get('token');
+                    const config = {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }
+                    try {
+                        const res = await axios.get(`http://localhost:8080/api/class/find-classes-by-studentId/${id}`, config);
+
+                        setClassData(res.data.studentClass)
+
+                    } catch (error) {
+
+                    }
                 }
-                try {
-                    const res = await axios.get(`http://localhost:8080/api/class/find-classes-by-studentId/${user?._id}`, config);
-
-                    setClassData(res.data.studentClass)
-
-                } catch (error) {
-
-                }
+                findClassId()
             }
-            findClassId()
         }
     }, [user])
 

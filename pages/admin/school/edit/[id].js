@@ -34,16 +34,19 @@ const Edit = () => {
 
 
     useEffect(() => {
-        const schoolGet = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/api/school/${schoolId}`);
-                setSchoolData(response.data.school)
+        if (!!schoolId) {
+            const schoolGet = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:8080/api/school/${schoolId}`);
+                    setSchoolData(response.data.school)
 
-            } catch (error) {
-                console.log(error.response.data)
+                } catch (error) {
+                    console.log(error.response.data)
+                }
             }
+            schoolGet()
         }
-        schoolGet()
+
     }, [schoolId])
 
 

@@ -9,6 +9,7 @@ import { deleteSubject } from '../../../components/helper/delete';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
 import { useUser } from '../../../contexts/userContext'
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 
 const ViewAllCourses = () => {
@@ -60,9 +61,9 @@ const ViewAllCourses = () => {
         },
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
-                <div>
-                    <button onClick={() => editHandler(data.name, data.code, _id)} className='editBtn mr-2 tracking-wide'>Edit</button>
-                    <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
+                <div className='flex items-center justify-evenly'>
+                    <p onClick={() => editHandler(data.name, data.code, _id)} className='text-cyan-600 cursor-pointer' title="Edit"><FaEdit/></p>
+                    <p onClick={() => deleteHandler(_id)} className='text-red-600 cursor-pointer' title="Delete"><FaTrashAlt/></p>
                 </div>
             )
         },

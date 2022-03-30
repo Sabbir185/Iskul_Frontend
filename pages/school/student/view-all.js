@@ -12,6 +12,7 @@ import { useUser } from '../../../contexts/userContext';
 import UserDetails from '../../../components/modal/userDetails';
 import { useSearchResult } from '../../../contexts/searchInputContext';
 import UserSearch from '../../../components/helper/user-search';
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 
 const ViewAllStudent = () => {
@@ -89,9 +90,9 @@ const ViewAllStudent = () => {
         },
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
-                <div>
-                    <button onClick={() => editHandler(data.firstName, data.lastName, data.email, _id)} className='editBtn mr-2 tracking-wide'>Edit</button>
-                    <button onClick={() => deleteHandler(_id)} className='deleteBtn ml-2 tracking-wide'>Delete</button>
+                <div className='flex items-center justify-evenly'>
+                    <p onClick={() => editHandler(data.firstName, data.lastName, data.email, _id)} className='text-cyan-600 cursor-pointer' title="Edit"><FaEdit /></p>
+                    <p onClick={() => deleteHandler(_id)} className='text-red-600 cursor-pointer' title="Delete"><FaTrashAlt /></p>
                 </div>
             )
         },

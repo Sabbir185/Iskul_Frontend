@@ -5,44 +5,30 @@ const data = [
     {
         name: 'Grade 1',
         salary: 30000,
-        pv: 2400,
-        amt: 2400,
     },
     {
         name: 'Grade 2',
         salary: 25000,
-        pv: 1398,
-        amt: 2210,
     },
     {
         name: 'Grade 4',
         salary: 18500,
-        pv: 3908,
-        amt: 2000,
     },
     {
         name: 'Grade 3',
         salary: 23500,
-        pv: 9800,
-        amt: 2290,
     },
     {
         name: 'Grade 5',
         salary: 15000,
-        pv: 4800,
-        amt: 2181,
     },
     {
         name: 'Grade 6',
         salary: 12000,
-        pv: 3800,
-        amt: 2500,
     },
     {
         name: 'Grade 7',
         salary: 10000,
-        pv: 4300,
-        amt: 2100,
     },
 ];
 
