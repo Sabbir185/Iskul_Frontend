@@ -1,15 +1,15 @@
 import React from 'react';
-import StudentLayout from '../../layout/adminLayout';
+import AdminLayout from '../../layout/adminLayout';
 
 const StudentList = () => {
 
 
     return (
-        <StudentLayout>
+        <AdminLayout>
             <div className='text-center font-bold'>
-                <p className='mt-10'>Student Classes Info </p>
+                <p className='mt-10'>I am a student</p>
             </div>
-        </StudentLayout>
+        </AdminLayout>
     );
 };
 

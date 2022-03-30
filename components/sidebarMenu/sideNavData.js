@@ -1,6 +1,11 @@
 import {
-	AppstoreOutlined, AuditOutlined, BookOutlined, FundOutlined, NotificationOutlined, ReadOutlined, SafetyCertificateOutlined,
-	ScheduleOutlined, TeamOutlined
+	AppstoreOutlined,
+	SettingOutlined,
+	HomeOutlined,
+	ReadOutlined,
+	TeamOutlined,
+	SafetyCertificateOutlined,
+	ScheduleOutlined
 } from "@ant-design/icons";
 
 
@@ -48,6 +53,7 @@ const HeadmasterSidebarData = [
 ];
 
 
+
 const TeacherSidebarData = [
 	{
 		title: "Manage Routine",
@@ -72,7 +78,6 @@ const TeacherSidebarData = [
 ];
 
 
-// Student Side bar Data
 const StudentSidebarData = [
 	{
 		title: "Show Routine",

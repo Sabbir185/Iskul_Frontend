@@ -13,7 +13,7 @@ import {
 	StudentSidebarData
 } from "../sidebarMenu/sideNavData";
 import { useUser } from "../../contexts/userContext";
-import studentLogo from "../../public/images/studentLogo.jpg";
+import { useRouter } from 'next/router'
 
 
 const SideMenu = () => {
@@ -25,7 +25,7 @@ const SideMenu = () => {
 
 		if (user.role === 'admin') {
 			router.push('/admin')
-			
+
 		} else if (user.role === 'headmaster') {
 			router.push('/school')
 
@@ -76,14 +76,6 @@ const SideMenu = () => {
 				user?.role === 'student' &&
 				<div className="w-52 flex items-center justify-center relative logo-img mt-5 border-b-2 border-gray-400 pb-5">
 					<Image className="shrink cursor-pointer" src={logo15} alt="logo" onClick={homePageHandle} width={150} height={150} />
-				</div>
-			}
-
-			{/* Student logo section */}
-			{
-				user?.role === 'student' &&
-				<div className="w-52 flex items-center justify-center relative logo-img mt-5 border-b-2 border-gray-400 pb-5 " >
-					<Image className="shrink cursor-pointer rounded-full" src={studentLogo} alt="logo" onClick={homePageHandle} width={150} height={150}/>
 				</div>
 			}
 
