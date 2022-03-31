@@ -11,6 +11,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class1",
+            "classTime":"11AM - 12PM",
             "saturday": "C",
             "sunday": "Networking",
             "monday": "OOP-I",
@@ -23,6 +24,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class2",
+            "classTime":"12 - 1PM",
             "saturday": "Networking",
             "sunday": "Discrete Math",
             "monday": "Algorithm",
@@ -35,18 +37,20 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class3",
-            "saturday": "Algorithm",
-            "sunday": "C++",
-            "monday": "Networking",
-            "tuesday": "OOP-I",
-            "wednesday": "Discrete Math",
-            "thursday": "Data Structure",
+            "classTime":"1 - 2PM",
+            "saturday": "Break",
+            "sunday": "Break",
+            "monday": "Break",
+            "tuesday": "Break",
+            "wednesday": "Break ",
+            "thursday": "Break ",
             "friday": "X",
             "__v":0
         },
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class4",
+            "classTime":"2 - 3PM",
             "saturday": "OOP-I",
             "sunday": "OOP-I",
             "monday": "Data Structure",
@@ -59,6 +63,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class5",
+            "classTime":"3 - 4PM",
             "saturday": "Java",
             "sunday": "Networking",
             "monday": "C",
@@ -83,6 +88,7 @@ const ViewRoutine = () => {
     }, [token])
 
     const column = [
+        {dataField: 'classTime', headerName: 'Duration'},
         {dataField: 'saturday', headerName: 'Saturday'},
         {dataField: 'sunday', headerName: 'Sunday'},
         {dataField: 'monday', headerName: 'Monday'},
