@@ -24,7 +24,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class2",
-            "classTime":"12 - 1PM",
+            "classTime":"12PM - 1PM",
             "saturday": "Networking",
             "sunday": "Discrete Math",
             "monday": "Algorithm",
@@ -37,7 +37,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class3",
-            "classTime":"1 - 2PM",
+            "classTime":"1PM - 2PM",
             "saturday": "Break",
             "sunday": "Break",
             "monday": "Break",
@@ -50,7 +50,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class4",
-            "classTime":"2 - 3PM",
+            "classTime":"2PM - 3PM",
             "saturday": "OOP-I",
             "sunday": "OOP-I",
             "monday": "Data Structure",
@@ -63,7 +63,7 @@ const ViewRoutine = () => {
         {
             "_id":{"$oid":"62359aa8a47d54131c7b76ba"},
             "classNo":"class5",
-            "classTime":"3 - 4PM",
+            "classTime":"3PM - 4PM",
             "saturday": "Java",
             "sunday": "Networking",
             "monday": "C",
