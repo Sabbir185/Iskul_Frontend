@@ -26,8 +26,15 @@ const adminSidebarData = [
 
 const HeadmasterSidebarData = [
 	{
-		title: "Class/Subject",
-		subtitle: [{ title: 'Add Subject', link: 'school/courses/add-subject' }, { title: 'Create Class', link: 'school/class/create-class' }, { title: 'View Classes', link: 'school/class/view-classes' }, { title: 'View Subjects', link: 'school/courses/view-all' }],
+		title: "Class Management",
+		subtitle: [
+			{ title: 'Add Subject', link: 'school/courses/add-subject' },
+			{ title: 'Class Room', link: 'school/class-room/create' },
+			{ title: 'Class Time', link: 'school/class-time/create' },
+			{ title: 'Create Class', link: 'school/class/create-class' },
+			{ title: 'View Classes', link: 'school/class/view-classes' },
+			{ title: 'View Subjects', link: 'school/courses/view-all' },
+		],
 		icon: AppstoreOutlined
 	},
 	{
@@ -98,9 +105,9 @@ const StudentSidebarData = [
 
 
 
-export { 
-	adminSidebarData, 
-	HeadmasterSidebarData, 
-	TeacherSidebarData, 
-	StudentSidebarData 
+export {
+	adminSidebarData,
+	HeadmasterSidebarData,
+	TeacherSidebarData,
+	StudentSidebarData
 };
