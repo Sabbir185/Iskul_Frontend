@@ -9,7 +9,7 @@ import { deleteClass } from '../../../components/helper/delete';
 import { useRouter } from 'next/router';
 import { message } from 'antd';
 import { useUser } from '../../../contexts/userContext';
-import SchoolDetails from '../../../components/modal/school-details';
+import ClassDetails from '../../../components/modal/class-details';
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 
@@ -39,8 +39,8 @@ const ViewClasses = () => {
     }, [user])
 
 
-    const editHandler = (subject, id) => {
-        router.push(`/school/class/${subject}/${id}`)
+    const editHandler = (className, id) => {
+        router.push(`/school/class/${className}/${id}`)
     }
 
     const deleteHandler = async (id) => {
@@ -68,7 +68,7 @@ const ViewClasses = () => {
     // column and row data
     const column = [
         {
-            dataField: 'name', headerName: 'Group', formatter: (name, data) => (
+            dataField: 'name', headerName: 'Class Name', formatter: (name, data) => (
                 <p className='text-cyan-500 cursor-pointer' onClick={() => showModal(data._id)}>{name}</p>
             )
         },
@@ -88,6 +88,8 @@ const ViewClasses = () => {
     ]
 
 
+    // console.log(classes)
+
     return (
         <AdminLayout>
             <h1 className='text-center font-semibold text-lg mt-4 text-green-600'>Class List</h1>
@@ -96,7 +98,7 @@ const ViewClasses = () => {
             {
                 !!classId &&
                 <Modal title="Class Details" visible={isModalVisible} onCancel={handleCancel} footer={null} >
-                    <SchoolDetails id={classId} />
+                    <ClassDetails id={classId} />
                 </Modal>
             }
         </AdminLayout>

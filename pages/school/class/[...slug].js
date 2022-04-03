@@ -6,53 +6,45 @@ import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router'
 import { useUser } from '../../../contexts/userContext';
+import { getAllClassRoomBySchoolId } from '../../../data/class-room-api';
+import { getAllClassTimeBySchoolId } from '../../../data/class-time-api';
 
 
 const UpdateClass = () => {
     const { user } = useUser();
     const router = useRouter();
-    const subjectName = router.query.slug[0];
-    const classID = router.query.slug[1];
+    const className = router?.query?.slug[0] || '';
+    const classID = router?.query?.slug[1] || '';
 
-    const [subjects, setSubjects] = useState([]);
-    const [teachers, setTeachers] = useState([]);
+    const [classRooms, setClassRooms] = useState([]);
+    const [classTimes, setClassTimes] = useState([]);
 
-    // fetching all subject
+    // fetch class rooms
     useEffect(() => {
-        async function schools() {
-            try {
-                const res = await axios.get('http://localhost:8080/api/subject/get-all');
-                setSubjects(res.data.subjects)
-
-            } catch (error) {
-                alert(error.response.data.message)
+        const schoolId = user?.schoolId?._id;
+        if (!!schoolId) {
+            const getRooms = async () => {
+                const res = await getAllClassRoomBySchoolId(schoolId);
+                setClassRooms(res.class_rooms.class_rooms)
             }
+            getRooms();
         }
-        schools()
-    }, [])
+    }, [user?.schoolId?._id])
 
-    // fetching all teacher
+    // fetch class times
     useEffect(() => {
-        async function teachersData() {
-            const token = await Cookies.get('token');
-            const config = {
-                headers: { 'Authorization': `Bearer ${token}` }
+        const schoolId = user?.schoolId?._id;
+        if (!!schoolId) {
+            const getTimes = async () => {
+                const res = await getAllClassTimeBySchoolId(schoolId);
+                setClassTimes(res.class_times.class_times)
             }
-            try {
-                const res = await axios.get('http://localhost:8080/api/user/get-filtered-data?role=teacher', config);
-                setTeachers(res.data.data)
-
-            } catch (error) {
-                alert(error.response.data.message)
-            }
+            getTimes();
         }
-        teachersData()
-    }, [])
-
+    }, [user?.schoolId?._id])
 
     // update class
     const onFinish = (values) => {
-        console.log(values)
         async function createClass() {
             try {
                 const token = await Cookies.get('token');
@@ -71,7 +63,7 @@ const UpdateClass = () => {
             } catch (error) {
                 if (error.response.data.message) {
                     message.error(error.response.data.message);
-    
+
                 } else {
                     message.warning("Failed, maybe you're not authorized!");
                 }
@@ -81,23 +73,23 @@ const UpdateClass = () => {
     };
 
 
-    // handle subjects section
-    const subjectSelectedData = [];
-    for (let i = 0; i < subjects.length; i++) {
-        subjectSelectedData.push(<Option key={i} value={subjects[i]._id}>{subjects[i].name}</Option>);
+    // handle class rooms section
+    const classRoomSelectedData = [];
+    for (let i = 0; i < classRooms.length; i++) {
+        classRoomSelectedData.push(<Option key={i} value={classRooms[i]}>{classRooms[i]}</Option>);
     }
 
-    // handle teachers section
-    const teacherSelectedData = [];
-    for (let i = 0; i < teachers.length; i++) {
-        teacherSelectedData.push(<Option key={i} value={teachers[i]._id}>{teachers[i].firstName + ' ' + teachers[i].lastName}</Option>);
+    // handle class times section
+    const classTimeSelectedData = [];
+    for (let i = 0; i < classTimes.length; i++) {
+        classTimeSelectedData.push(<Option key={i} value={classTimes[i]}>{classTimes[i]}</Option>);
     }
 
 
 
     return (
         <AdminLayout>
-            <div className='bg-slate-300 h-screen p-0 m-0'>
+            <div className='bg-slate-300 h-full pb-10'>
                 <h1 className='text-center py-2 font-semibold text-lg text-cyan-800'>Update Class</h1>
                 <div className='m-auto bg-slate-200 rounded-lg p-10 shadow-lg font-semibold md:w-3/5 h-auto'>
 
@@ -106,21 +98,21 @@ const UpdateClass = () => {
                             label="Class Name"
                             name="name"
                         >
-                            <Input placeholder={subjectName} />
+                            <Input placeholder={className} />
                         </Form.Item>
 
-                        <Form.Item name="subjects" label="Select Subjects">
+                        <Form.Item name="class_rooms" label="Select Class Rooms">
 
-                            <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='Subjects'>
-                                {subjectSelectedData}
+                            <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='class rooms'>
+                                {classRoomSelectedData}
                             </Select>
 
                         </Form.Item>
 
-                        <Form.Item name="teachers" label="Select Teachers" >
+                        <Form.Item name="class_times" label="Select Class Times">
 
-                            <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='Teachers'>
-                                {teacherSelectedData}
+                            <Select mode="tags" style={{ width: '100%' }} tokenSeparators={[',']} placeholder='class times' showArrow={false}>
+                                {classTimeSelectedData}
                             </Select>
 
                         </Form.Item>

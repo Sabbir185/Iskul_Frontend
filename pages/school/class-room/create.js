@@ -32,7 +32,6 @@ const CreateRoom = () => {
 
 
     const onFinish = values => {
-        console.log('Received values of form:', values.names);
         if (!!values.names) {
             const schoolID = user?.schoolId?._id;
             if (!!schoolID) {
@@ -73,7 +72,7 @@ const CreateRoom = () => {
 
     return (
         <AdminLayout >
-            <h1 className='text-center pt-2 pb-5 font-semibold text-lg text-cyan-800'>Create class room, you can update or delete at any time!</h1>
+            <h1 style={{marginLeft: '17%'}} className='pt-2 pb-5 font-semibold text-lg text-cyan-800'>Create class room, you can update or delete at any time!</h1>
             <div className=''>
                 <Form name="dynamic_form_item" {...formItemLayoutWithOutLabel} onFinish={onFinish}>
                     <Form.List
@@ -144,7 +143,7 @@ const CreateRoom = () => {
 
             </div>
 
-        </AdminLayout >
+        </AdminLayout>
     );
 };
 
