@@ -1,8 +1,9 @@
 import React from 'react';
+import { useUser } from '../../contexts/userContext';
 
 
 const AssignedClassView = ({ data }) => {
-
+    const { user } = useUser();
 
     return (
         <div className='md:grid md:grid-cols-3 gap-2 text-center mt-5 bg-slate-200 rounded-lg py-5 px-3'>
@@ -18,8 +19,9 @@ const AssignedClassView = ({ data }) => {
                 <hr />
 
                 {
-                    data?.subjects?.map((subject, i) => <ul key={i} className='font-mono mt-2'>
-                        <li>{subject.name}</li>
+                    data?.class_info?.map((data, i) => <ul key={i} className='font-mono mt-2'>
+                        <li>{data.subjects.name}</li>
+                        <hr />
                     </ul>)
                 }
             </div>
@@ -29,8 +31,9 @@ const AssignedClassView = ({ data }) => {
                 <hr />
 
                 {
-                    data?.teachers?.map((teacher, i) => <ul key={i} className='font-mono mt-2'>
-                        <li>{teacher.firstName + " " + teacher.lastName}</li>
+                    data?.class_info?.map((data, i) => <ul key={i} className='font-mono mt-2'>
+                        <li className={data.teachers.firstName===user.firstName? 'text-green-500':''}>{data.teachers.firstName + " " + data.teachers.lastName}</li>
+                        <hr />
                     </ul>)
                 }
             </div>

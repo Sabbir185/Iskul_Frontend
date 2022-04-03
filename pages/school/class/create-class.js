@@ -114,7 +114,7 @@ const CreateClass = () => {
                                 },
                             ]}
                         >
-                            <Input placeholder='Name' />
+                            <Input placeholder='enter name' />
                         </Form.Item>
 
                         <Form.List name="class_info">
