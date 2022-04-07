@@ -97,7 +97,8 @@ const AddStudentInClass = () => {
 
     }
 
-    // update class
+    
+    // update class, student contains an array
     const onSubmit = async () => {
         const studentId = student[0]?._id;
         const data = {
