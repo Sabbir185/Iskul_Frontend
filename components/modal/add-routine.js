@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Input, message, Select } from 'antd';
+import { Form, Input, Button, Space, Select, message } from 'antd';
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const { Option } = Select;
 import axios from 'axios';
 import { useUser } from '../../contexts/userContext';
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import { getAllClassRoomBySchoolId } from '../../data/class-room-api';
+import { getAllClassTimeBySchoolId } from '../../data/class-time-api';
 
 
 const AddRoutine = ({ handleCancel }) => {
+    const [form] = Form.useForm();
     const router = useRouter();
     const { user } = useUser()
     const [classesData, setClassData] = useState(null);
-    const [filteredSubject, setFilteredSubject] = useState(null);
+    const [filteredSubject, setFilteredSubject] = useState([]);
+    const [classRooms, setClassRooms] = useState([]);
+    const [classTimes, setClassTimes] = useState([]);
 
 
     // class data fetched by school and teacher id
@@ -37,17 +43,41 @@ const AddRoutine = ({ handleCancel }) => {
         }
     }, [user])
 
+    // fetch class rooms
+    useEffect(() => {
+        const schoolId = user?.schoolId?._id;
+        if (!!schoolId) {
+            const getRooms = async () => {
+                const res = await getAllClassRoomBySchoolId(schoolId);
+                setClassRooms(res.class_rooms.class_rooms)
+            }
+            getRooms();
+        }
+    }, [user?.schoolId?._id])
 
-    // submit or post data
+    // fetch class times
+    useEffect(() => {
+        const schoolId = user?.schoolId?._id;
+        if (!!schoolId) {
+            const getTimes = async () => {
+                const res = await getAllClassTimeBySchoolId(schoolId);
+                setClassTimes(res.class_times.class_times)
+            }
+            getTimes();
+        }
+    }, [user?.schoolId?._id])
+
+
+    // submit or post routine data
     const handleSubmit = async (values) => {
-        const { class_name, subject, day1, day2, class_time1, class_time2 } = values;
+        const { class_name, subject, schedules } = values;
         const teacher = user?._id;
         const school = user?.schoolId?._id;
-        const day1_time = [day1, class_time1]
-        const day2_time = [day2, class_time2]
         const sendData = {
-            class_name, subject, teacher, school, day1_time, day2_time
+            class_name, subject, teacher, school, schedules
         }
+
+        console.log(sendData)
 
         if (!!user) {
             try {
@@ -77,14 +107,27 @@ const AddRoutine = ({ handleCancel }) => {
 
 
     const handleChange = (id) => {
-        const subjectsData = classesData.find(data => data._id === id)
-        setFilteredSubject(subjectsData)
+        const targetClass = classesData?.find(data => data._id === id);
+        const teacherClassInfo = targetClass?.class_info?.filter(info => info.teachers._id === user._id)
+
+        // filter subject according to teacher which was set by headmaster/admin
+        setFilteredSubject(teacherClassInfo)
+    }
+
+    const [days, setDays] = useState(0)
+    const handleDaysOfWeek = (id) => {
+        const daysInfo = filteredSubject?.find(info => info.subjects._id === id)
+        setDays(daysInfo.days)
     }
 
 
     return (
         <div>
-            <Form onFinish={handleSubmit} layout='vertical'>
+            <Form
+                onFinish={handleSubmit}
+                layout='vertical'
+                form={form}
+            >
 
                 <Form.Item name="class_name" label="Select Class" rules={[{ required: true, message: 'Please Select Class' }]} hasFeedback>
                     <Select placeholder='Class' onChange={handleChange}>
@@ -95,58 +138,84 @@ const AddRoutine = ({ handleCancel }) => {
                 </Form.Item>
 
                 <Form.Item name="subject" label="Select Subject" rules={[{ required: true, message: 'Please Select Subject' }]} hasFeedback>
-                    <Select style={{ width: '100%' }} placeholder='Subject'>
+                    <Select style={{ width: '100%' }} placeholder='Subject' onChange={handleDaysOfWeek}>
                         {
-                            filteredSubject?.subjects?.map((sub, i) => <Option key={i} value={sub._id}>{sub.name}</Option>)
+                            filteredSubject?.map((data, i) => <Option key={i} value={data.subjects._id}>{data.subjects.name}</Option>)
                         }
                     </Select>
                 </Form.Item>
 
-                <div className='md:grid md:grid-cols-2 md:gap-2'>
-                    <Form.Item name="day1" label="Select Day1" rules={[{ required: true, message: 'Please Select Day1' }]} hasFeedback>
-                        <Select style={{ width: '100%' }} placeholder='Day1'>
-                            <Option value='Saturday'>Saturday</Option>
-                            <Option value='Sunday'>Sunday</Option>
-                            <Option value='Monday'>Monday</Option>
-                            <Option value='Tuesday'>Tuesday</Option>
-                            <Option value='Wednesday'>Wednesday</Option>
-                            <Option value='Thursday'>Thursday</Option>
-                        </Select>
-                    </Form.Item>
+                <p className='text-green-600'><em>Set <span className='font-bold'>{days}</span> days schedule/week</em></p>
 
-                    <Form.Item name="day2" label="Select Day2" rules={[{ required: true, message: 'Please Select Day2' }]} hasFeedback>
-                        <Select style={{ width: '100%' }} placeholder='Day2'>
-                            <Option value='Saturday'>Saturday</Option>
-                            <Option value='Sunday'>Sunday</Option>
-                            <Option value='Monday'>Monday</Option>
-                            <Option value='Tuesday'>Tuesday</Option>
-                            <Option value='Wednesday'>Wednesday</Option>
-                            <Option value='Thursday'>Thursday</Option>
-                        </Select>
-                    </Form.Item>
-                </div>
+                <Form.List name="schedules">
+                    {(fields, { add, remove }) => (
+                        <>
+                            {fields.map(({ key, name, ...restField }) => (
+                                <Space key={key} className='block' align="baseline">
+                                    <div className='md:flex md:gap-3'>
 
-                <div className='md:grid md:grid-cols-2 md:gap-2'>
-                    <Form.Item name="class_time1" label="Day1 Time" rules={[{ required: true, message: 'Please Select Class Time' }]} hasFeedback>
-                        <Select placeholder='Class Time'>
-                            <Option value='09:00 AM'>09:00 AM</Option>
-                            <Option value='10.30 AM'>10.30 AM</Option>
-                            <Option value='12:00 PM'>12:00 PM</Option>
-                            <Option value='02:00 PM'>02:00 PM</Option>
-                            <Option value='03:30 PM'>03:30 PM</Option>
-                        </Select>
-                    </Form.Item>
+                                        <Form.Item
+                                            {...restField}
+                                            name={[name, 'day']}
+                                            rules={[{ required: true, message: 'Please Select Day' }]}
+                                            hasFeedback
+                                        >
+                                            <Select style={{ width: '120px' }} placeholder='select day'>
+                                                <Option value='Saturday'>Saturday</Option>
+                                                <Option value='Sunday'>Sunday</Option>
+                                                <Option value='Monday'>Monday</Option>
+                                                <Option value='Tuesday'>Tuesday</Option>
+                                                <Option value='Wednesday'>Wednesday</Option>
+                                                <Option value='Thursday'>Thursday</Option>
+                                                <Option value='Friday'>Friday</Option>
+                                            </Select>
+                                        </Form.Item>
 
-                    <Form.Item name="class_time2" label="Day2 Time" rules={[{ required: true, message: 'Please Select Class Time' }]} hasFeedback>
-                        <Select placeholder='Class Time'>
-                            <Option value='09:00 AM'>09:00 AM</Option>
-                            <Option value='10.30 AM'>10.30 AM</Option>
-                            <Option value='12:00 PM'>12:00 PM</Option>
-                            <Option value='02:00 PM'>02:00 PM</Option>
-                            <Option value='03:30 PM'>03:30 PM</Option>
-                        </Select>
-                    </Form.Item>
-                </div>
+
+                                        <Form.Item
+                                            {...restField}
+                                            name={[name, 'class_time']}
+                                            rules={[{ required: true, message: 'Please Select Time' }]}
+                                            hasFeedback
+                                        >
+
+                                            <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false}>
+                                                {
+                                                    classTimes?.map((classTime, i) => <Option key={i} value={classTime}>{classTime}</Option>)
+                                                }
+                                            </Select>
+
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            {...restField}
+                                            name={[name, 'class_room']}
+                                            rules={[{ required: true, message: 'Please Select Room' }]}
+                                            hasFeedback
+                                        >
+
+                                            <Select style={{ width: '150px' }} placeholder='select class room'>
+                                                {
+                                                    classRooms?.map((classRoom, i) => <Option key={i} value={classRoom}>{classRoom}</Option>)
+                                                }
+                                            </Select>
+
+                                        </Form.Item>
+                                    </div>
+
+                                    <p className='text-red-500 font-bold'><MinusCircleOutlined onClick={() => remove(name)} /></p>
+                                </Space>
+                            ))}
+                            <Form.Item>
+                                <Button type="dashed" onClick={() => add()} block>
+                                    <span className='text-green-700'> + Add Class Schedule</span>
+
+                                </Button>
+                            </Form.Item>
+                        </>
+                    )}
+                </Form.List>
+
 
                 <Button type="primary" htmlType='submit'>Create</Button>
             </Form>
