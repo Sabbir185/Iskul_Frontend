@@ -86,3 +86,13 @@
   color: red;
 }
 
+
+/* routine update */
+[layout="TBToggle"] {
+  display: none;
+}
+
+
+[layout="UpToggle"] {
+ @apply block
+}

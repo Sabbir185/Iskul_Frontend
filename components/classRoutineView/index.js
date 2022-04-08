@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, LeftCircleOutlined } from '@ant-design/icons';
 import { message, Modal } from 'antd';
 import axios from 'axios'
 import { useUser } from '../../contexts/userContext';
@@ -37,18 +37,24 @@ const ClassRoutineView = ({ id }) => {
     }, [id])
 
 
-    //modal
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [routineID, setRoutineID] = useState(null);
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
 
     // actions
     const editHandler = (id) => {
         setRoutineID(id)
-        setIsModalVisible(true);
+
+        const tableToggler = document.querySelector("#tableToggle");
+        const updateToggler = document.querySelector("#updateToggle");
+
+        tableToggler.getAttribute('layout') === 'TBToggle'
+            ? tableToggler.removeAttribute('layout')
+            : tableToggler.setAttribute('layout', 'TBToggle')
+
+        updateToggler.getAttribute('layout') === 'UpToggle'
+            ? updateToggler.removeAttribute('layout')
+            : updateToggler.setAttribute('layout', 'UpToggle')
     }
+
 
     const deleteHandler = async (id) => {
         const res = await deleteRoutine(id)
@@ -61,21 +67,29 @@ const ClassRoutineView = ({ id }) => {
     const column = [
         {
             dataField: 'subject', headerName: 'Subject', formatter: (_, data) => (
-                <p>{data.subject.name?.toUpperCase()}</p>)
+                <p className='font-mono'>{data.subject.name?.toUpperCase()}</p>)
         },
         {
             dataField: 'teacher', headerName: 'Teacher', formatter: (_, data) => (
-                <p>{data.teacher.firstName + " " + data.teacher.lastName}</p>)
+                <p className='font-mono'>{data.teacher.firstName + " " + data.teacher.lastName}</p>)
         },
 
         {
-            dataField: 'day1_time', headerName: 'Class Time', formatter: (_, data) => (
-                <p>{data.day1_time[0] + ", " + data.day1_time[1]}</p>)
+            dataField: '', headerName: 'Day', formatter: (_, data) => (
+                data?.schedules?.map((d, i) => <li key={i} className='list-none text-md font-mono'>{d.day}</li>)
+            )
         },
 
         {
-            dataField: 'day2_time', headerName: 'Class Time', formatter: (_, data) => (
-                <p>{data.day2_time[0] + ", " + data.day2_time[1]}</p>)
+            dataField: '', headerName: 'Time', formatter: (_, data) => (
+                data?.schedules?.map((t, i) => <li key={i} className='list-none text-md font-mono'>{t.class_time}</li>)
+            )
+        },
+
+        {
+            dataField: '', headerName: 'Room', formatter: (_, data) => (
+                data?.schedules?.map((r, i) => <li key={i} className='list-none text-md font-mono'>{r.class_room}</li>)
+            )
         },
 
 
@@ -88,18 +102,30 @@ const ClassRoutineView = ({ id }) => {
             )
         },
     ]
-    
 
-    const filteredRoutineData = routines.find(el => el._id === routineID)
+
+    // just convert array to object
+    const ObjectRoutineData = routines.find(el => el._id === routineID)
+
 
     return (
         <div>
-            <Table data={routines} columns={column} />
+
+            <div id="tableToggle">
+                <Table data={routines} columns={column} />
+            </div>
+
 
             {/* update class routine */}
-            <Modal title="Update Class Routine" visible={isModalVisible} onCancel={handleCancel} footer={null}>
-                <UpdateRoutine id={routineID} handleCancel={handleCancel} routineData={filteredRoutineData}/>
-            </Modal>
+            <div id="updateToggle" className='hidden mx-auto w-2/3 border-2 text-center bg-slate-50 rounded-lg relative'>
+
+                <h1 onClick={editHandler} className='cursor-pointer absolute top-3 left-5 text-cyan-600 flex items-center gap-1'><LeftCircleOutlined />Back</h1>
+
+                <UpdateRoutine id={routineID} routineData={ObjectRoutineData} />
+
+            </div>
+
+
         </div>
     );
 };

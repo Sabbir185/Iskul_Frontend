@@ -77,8 +77,6 @@ const AddRoutine = ({ handleCancel }) => {
             class_name, subject, teacher, school, schedules
         }
 
-        console.log(sendData)
-
         if (!!user) {
             try {
                 const token = await Cookies.get('token');
