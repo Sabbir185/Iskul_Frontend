@@ -18,6 +18,41 @@ const AddRoutine = ({ handleCancel }) => {
     const [filteredSubject, setFilteredSubject] = useState([]);
     const [classRooms, setClassRooms] = useState([]);
     const [classTimes, setClassTimes] = useState([]);
+    const [checkDuplicate, setCheckDuplicate] = useState([]);
+    const [checkByDay, setCheckByDay] = useState(null);
+    const [checkBTime, setCheckByTime] = useState(null);
+
+
+    const handleDays = (day) => {
+        setCheckByDay(day)
+    }
+    const handleTimes = (time) => {
+        setCheckByTime(time)
+    }
+
+    // duplicate data fetching
+    useEffect(() => {
+        const schoolId = user?.schoolId?._id
+        if (!!schoolId) {
+            async function duplicationCheck() {
+                try {
+                    const data = {
+                        day: checkByDay,
+                        school: schoolId
+                    }
+                    const res = await axios.post(`http://localhost:8080/api/routine/checking-duplication`, data);
+
+                    if (res.data.status === true) {
+                        setCheckDuplicate(res.data.matched)
+                    }
+
+                } catch (error) {
+                    message.error(error.response.data.message)
+                }
+            }
+            duplicationCheck();
+        }
+    }, [checkByDay, user?.schoolId?._id])
 
 
     // class data fetched by school and teacher id
@@ -43,6 +78,7 @@ const AddRoutine = ({ handleCancel }) => {
         }
     }, [user])
 
+
     // fetch class rooms
     useEffect(() => {
         const schoolId = user?.schoolId?._id;
@@ -54,6 +90,7 @@ const AddRoutine = ({ handleCancel }) => {
             getRooms();
         }
     }, [user?.schoolId?._id])
+
 
     // fetch class times
     useEffect(() => {
@@ -119,6 +156,18 @@ const AddRoutine = ({ handleCancel }) => {
     }
 
 
+    let clsTime = []
+    let clsRoom = []
+    checkDuplicate?.map(el => {
+        const schedule = el?.schedules
+        schedule?.map(data => {
+            if (data.class_time === checkBTime && data.day === checkByDay) {
+                clsRoom.push(data.class_room)
+            }
+        })
+    })
+
+
     return (
         <div>
             <Form
@@ -158,7 +207,7 @@ const AddRoutine = ({ handleCancel }) => {
                                             rules={[{ required: true, message: 'Please Select Day' }]}
                                             hasFeedback
                                         >
-                                            <Select style={{ width: '120px' }} placeholder='select day'>
+                                            <Select style={{ width: '120px' }} placeholder='select day' onChange={handleDays}>
                                                 <Option value='Saturday'>Saturday</Option>
                                                 <Option value='Sunday'>Sunday</Option>
                                                 <Option value='Monday'>Monday</Option>
@@ -177,9 +226,15 @@ const AddRoutine = ({ handleCancel }) => {
                                             hasFeedback
                                         >
 
-                                            <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false}>
+                                            <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false} onChange={handleTimes}>
                                                 {
-                                                    classTimes?.map((classTime, i) => <Option key={i} value={classTime}>{classTime}</Option>)
+                                                    classTimes?.map((classTime, i) => <Option
+                                                        key={i}
+                                                        value={classTime}
+                                                    // disabled={clsTime?.includes(classTime) ? true : false}
+                                                    >
+                                                        {classTime}
+                                                    </Option>)
                                                 }
                                             </Select>
 
@@ -194,7 +249,13 @@ const AddRoutine = ({ handleCancel }) => {
 
                                             <Select style={{ width: '150px' }} placeholder='select class room'>
                                                 {
-                                                    classRooms?.map((classRoom, i) => <Option key={i} value={classRoom}>{classRoom}</Option>)
+                                                    classRooms?.map((classRoom, i) => <Option
+                                                        key={i}
+                                                        value={classRoom}
+                                                        disabled={clsRoom?.includes(classRoom) ? true : false}
+                                                    >
+                                                        {classRoom}
+                                                    </Option>)
                                                 }
                                             </Select>
 
