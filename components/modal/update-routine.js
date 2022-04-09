@@ -16,6 +16,53 @@ const UpdateRoutine = ({ id, routineData }) => {
     const [classRooms, setClassRooms] = useState([]);
     const [classTimes, setClassTimes] = useState([]);
 
+    const [checkDuplicate, setCheckDuplicate] = useState([]);
+    const [checkByDay, setCheckByDay] = useState(null);
+    const [checkBTime, setCheckByTime] = useState(null);
+
+    const handleDays = (day) => {
+        setCheckByDay(day)
+    }
+    const handleTimes = (time) => {
+        setCheckByTime(time)
+    }
+
+    // duplicate data fetching
+    useEffect(() => {
+        const schoolId = user?.schoolId?._id
+        if (!!schoolId) {
+            async function duplicationCheck() {
+                try {
+                    const data = {
+                        day: checkByDay,
+                        school: schoolId
+                    }
+                    const res = await axios.post(`http://localhost:8080/api/routine/checking-duplication`, data);
+
+                    if (res.data.status === true) {
+                        setCheckDuplicate(res.data.matched)
+                    }
+
+                } catch (error) {
+                    message.error(error.response.data.message)
+                }
+            }
+            duplicationCheck();
+        }
+    }, [checkByDay, user?.schoolId?._id])
+
+
+    let clsTime = []
+    let clsRoom = []
+    checkDuplicate?.map(el => {
+        const schedule = el?.schedules
+        schedule?.map(data => {
+            if (data.class_time === checkBTime && data.day === checkByDay) {
+                clsRoom.push(data.class_room)
+            }
+        })
+    })
+
 
     // fetch class rooms
     useEffect(() => {
@@ -44,43 +91,94 @@ const UpdateRoutine = ({ id, routineData }) => {
 
     // update or post data
     const handleSubmit = async (values) => {
-        // const {  } = values;
-        let one, two, three, four, five, six, seven;
+        let data;
+        if (routineData?.schedules?.length === 1) {
+            const { day0, class_time0, class_room0 } = values;
+            data = [{ day: day0, class_time: class_time0, class_room: class_room0 }]
 
-        for(let i=0; i<routineData?.schedules?.length; i++ ){
-            
+        } else if (routineData?.schedules?.length === 2) {
+            const { day0, class_time0, class_room0, day1, class_time1, class_room1 } = values;
+            data = [
+                { day: day0, class_time: class_time0, class_room: class_room0 },
+                { day: day1, class_time: class_time1, class_room: class_room1 },
+            ]
+
+        } else if (routineData?.schedules?.length === 3) {
+            const { day0, class_time0, class_room0,
+                day1, class_time1, class_room1,
+                day2, class_time2, class_room2
+            } = values;
+            data = [
+                { day: day0, class_time: class_time0, class_room: class_room0 },
+                { day: day1, class_time: class_time1, class_room: class_room1 },
+                { day: day2, class_time: class_time2, class_room: class_room2 },
+            ]
+
+        } else if (routineData?.schedules?.length === 4) {
+            const { day0, class_time0, class_room0,
+                day1, class_time1, class_room1,
+                day2, class_time2, class_room2,
+                day3, class_time3, class_room3,
+            } = values;
+            data = [
+                { day: day0, class_time: class_time0, class_room: class_room0 },
+                { day: day1, class_time: class_time1, class_room: class_room1 },
+                { day: day2, class_time: class_time2, class_room: class_room2 },
+                { day: day3, class_time: class_time3, class_room: class_room3 },
+            ]
+
+        } else if (routineData?.schedules?.length === 5) {
+            const { day0, class_time0, class_room0,
+                day1, class_time1, class_room1,
+                day2, class_time2, class_room2,
+                day3, class_time3, class_room3,
+                day4, class_time4, class_room4,
+            } = values;
+            data = [
+                { day: day0, class_time: class_time0, class_room: class_room0 },
+                { day: day1, class_time: class_time1, class_room: class_room1 },
+                { day: day2, class_time: class_time2, class_room: class_room2 },
+                { day: day4, class_time: class_time4, class_room: class_room4 },
+            ]
+
+        } else if (routineData?.schedules?.length === 6) {
+            const { day0, class_time0, class_room0,
+                day1, class_time1, class_room1,
+                day2, class_time2, class_room2,
+                day3, class_time3, class_room3,
+                day4, class_time4, class_room4,
+                day5, class_time5, class_room5,
+            } = values;
+            data = [
+                { day: day0, class_time: class_time0, class_room: class_room0 },
+                { day: day1, class_time: class_time1, class_room: class_room1 },
+                { day: day2, class_time: class_time2, class_room: class_room2 },
+                { day: day5, class_time: class_time5, class_room: class_room5 },
+            ]
+
         }
 
-        console.log(values)
-        // const sendData = {
+        if (!!id) {
+            try {
+                const token = await Cookies.get('token');
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+                const res = await axios.patch(`http://localhost:8080/api/routine/update/${id}`, data, config)
 
-        // }
+                if (res.data.status === true) {
+                    message.success(res.data.message)
+                }
 
-
-        // if (!!id) {
-        //     try {
-        //         const token = await Cookies.get('token');
-        //         const config = {
-        //             headers: { Authorization: `Bearer ${token}` }
-        //         }
-        //         const res = await axios.patch(`http://localhost:8080/api/routine/update/${id}`, sendData, config)
-
-        //         if (res.data.status === true) {
-        //             message.success(res.data.message)
-        //         }
-
-        //     } catch (error) {
-        //         if (error.response.data.message) {
-        //             message.success(error.response.data.message)
-        //         } else {
-        //             message.success(error.message)
-        //         }
-        //     }
-        // }
+            } catch (error) {
+                if (error.response.data.message) {
+                    message.success(error.response.data.message)
+                } else {
+                    message.success(error.message)
+                }
+            }
+        }
     }
-
-    console.log(routineData)
-
 
 
     return (
@@ -96,7 +194,7 @@ const UpdateRoutine = ({ id, routineData }) => {
                                 initialValue={data.day}
                                 hasFeedback
                             >
-                                <Select style={{ width: '120px' }} placeholder='select day'>
+                                <Select style={{ width: '120px' }} placeholder='select day' onChange={handleDays}>
                                     <Option value='Saturday'>Saturday</Option>
                                     <Option value='Sunday'>Sunday</Option>
                                     <Option value='Monday'>Monday</Option>
@@ -114,7 +212,7 @@ const UpdateRoutine = ({ id, routineData }) => {
                                 hasFeedback
                             >
 
-                                <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false}>
+                                <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false} onChange={handleTimes}>
                                     {
                                         classTimes?.map((classTime, i) => <Option key={i} value={classTime}>{classTime}</Option>)
                                     }
@@ -131,7 +229,13 @@ const UpdateRoutine = ({ id, routineData }) => {
 
                                 <Select style={{ width: '150px' }} placeholder='select class room'>
                                     {
-                                        classRooms?.map((classRoom, i) => <Option key={i} value={classRoom}>{classRoom}</Option>)
+                                        classRooms?.map((classRoom, i) => <Option
+                                            key={i}
+                                            value={classRoom}
+                                            disabled={clsRoom?.includes(classRoom) ? true : false}
+                                        >
+                                            {classRoom}
+                                        </Option>)
                                     }
                                 </Select>
 

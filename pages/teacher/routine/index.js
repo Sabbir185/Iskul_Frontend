@@ -44,7 +44,6 @@ const Routine = () => {
     }
 
 
-
     // modal
     const [isModalVisible, setIsModalVisible] = useState(false);
     const showModal = () => {
