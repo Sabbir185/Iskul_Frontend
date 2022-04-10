@@ -26,3 +26,63 @@
 [layout="mainToggle"] {
   @apply md:ml-0
 }
+
+.tableContainer {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.editBtn {
+    background-color: rgba(14, 179, 14, 0.808);
+    width: 4rem;
+    border-radius: 5px;
+    border: 1px solid cyan;
+    color: rgb(212, 247, 88);
+    font-weight: 600;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    transition: all .1s;
+}
+.editBtn:hover {
+  transform: scale(1.07);
+}
+.editBtn:focus {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.deleteBtn {
+  background-color: rgba(240, 8, 8, 0.836);
+  width: 4rem;
+  border-radius: 5px;
+  border: 1px solid rgba(70, 196, 70, 0.808);
+  color: rgb(219, 233, 231);
+  font-weight: 600;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  transition: all .1s;
+}
+.deleteBtn:hover {
+  transform: scale(1.07);
+}
+.deleteBtn:focus {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.addBtn {
+    
+}
+
+
+.logo-img {
+  width: 70% !important;
+}
+
+
+
+.required-marker:after {
+  content:" *";
+  color: red;
+}
+

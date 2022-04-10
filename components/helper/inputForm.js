@@ -1,16 +1,37 @@
 import { useState } from "react";
 import { FaSistrix } from "react-icons/fa";
 import classes from "./inputForm.module.css";
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { useSearchResult } from "../../contexts/searchInputContext";
+
 
 const InputForm = () => {
   const [input, setInput] = useState();
+  const { searchResult, setSearchResult } = useSearchResult()
+
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
-  const formHandler = (e) => {
+
+  const formHandler = async (e) => {
     e.preventDefault();
-    console.log(input);
+    const token = await Cookies.get('token');
+    try {
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+      const res = await axios.get(`http://localhost:8080/api/school/get-filtered-data?schoolEmail=${input}`, config)
+
+      if (res.data.status === true) {
+        setSearchResult(res.data.data)
+      }
+
+    } catch (error) {
+      setSearchResult(error.response.data)
+    }
   };
+
 
   return (
     <form
@@ -19,7 +40,7 @@ const InputForm = () => {
     >
       <input
         type="text"
-        placeholder="search..."
+        placeholder="update school"
         className="w-auto py-1 pl-4 transform duration-200 focus:pr-8 focus:pl-3 focus:py-1 focus:ring-cyan-500 outline-none text-gray-500 focus:font-semibold"
         onChange={inputHandler}
       />
