@@ -26,7 +26,7 @@ const ClassRoutineView = ({ id }) => {
                     }
 
                 } catch (error) {
-                    if (error.response.data.message)
+                    if (error?.response?.data?.message)
                         message.error(error.response.data.message)
 
                     message.error(error.message)
@@ -58,8 +58,11 @@ const ClassRoutineView = ({ id }) => {
 
     const deleteHandler = async (id) => {
         const res = await deleteRoutine(id)
-        if (res.status) {
+        if (res?.status) {
             message.success(res.message)
+
+        } else {
+            message.warning(res.message)
         }
     }
 
@@ -71,7 +74,7 @@ const ClassRoutineView = ({ id }) => {
         },
         {
             dataField: 'teacher', headerName: 'Teacher', formatter: (_, data) => (
-                <p className='font-mono'>{data.teacher.firstName + " " + data.teacher.lastName}</p>)
+                <p className={`font-mono ${user?._id === data.teacher._id && 'text-green-500'}`}>{data.teacher.firstName + " " + data.teacher.lastName}</p>)
         },
 
         {

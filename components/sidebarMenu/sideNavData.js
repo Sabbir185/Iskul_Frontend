@@ -5,7 +5,9 @@ import {
 	ReadOutlined,
 	TeamOutlined,
 	SafetyCertificateOutlined,
-	ScheduleOutlined
+	ScheduleOutlined,
+	EditOutlined,
+	FileDoneOutlined
 } from "@ant-design/icons";
 
 
@@ -66,6 +68,11 @@ const TeacherSidebarData = [
 		title: "Manage Routine",
 		subtitle: [{ title: 'Assigned Class', link: 'teacher/assigned-class' }, { title: 'Routine', link: 'teacher/routine' }],
 		icon: AppstoreOutlined
+	},
+	{
+		title: "Attendance",
+		subtitle: [{ title: 'Create', link: 'teacher/attendance' }, { title: 'View Records', link: 'teacher/attendance/view-records' }],
+		icon: FileDoneOutlined
 	},
 	{
 		title: "Student",

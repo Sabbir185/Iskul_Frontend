@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import AdminLayout from '../../../layout/adminLayout';
 import { PlusCircleFilled, PlusCircleOutlined } from '@ant-design/icons';
-import AddRoutine from '../../../components/modal/add-routine';
+import AddRoutine from './add-routine';
 import { useUser } from '../../../contexts/userContext';
 import { Button, Form, Input, message, Select, Modal } from 'antd';
 const { Option } = Select;
 import axios from 'axios';
+import { useRouter } from 'next/router'
 import ClassRoutineView from '../../../components/classRoutineView';
 
 
 const Routine = () => {
-    const { user } = useUser()
+    const { user } = useUser();
+    const router = useRouter();
     const [classData, setClassData] = useState(null);
     const [classID, setClassId] = useState(null);
 

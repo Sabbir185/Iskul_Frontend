@@ -15,7 +15,7 @@ const deleteUser = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -38,7 +38,7 @@ const deleteSchool = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -60,7 +60,7 @@ const deleteSubject = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -83,7 +83,7 @@ const deleteClass = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -106,7 +106,7 @@ const deleteNotice = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -128,7 +128,7 @@ const deleteRoutine = async (id) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {
@@ -153,7 +153,7 @@ const deleteStudentFromClass = async (clsId, stdId) => {
                 return response.data;
 
         } catch (error) {
-            return error.response.data
+            return error?.response?.data
         }
 
     } else {

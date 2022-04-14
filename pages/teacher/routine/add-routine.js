@@ -3,11 +3,13 @@ import { Form, Input, Button, Space, Select, message } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 const { Option } = Select;
 import axios from 'axios';
-import { useUser } from '../../contexts/userContext';
+import { useUser } from '../../../contexts/userContext';
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { getAllClassRoomBySchoolId } from '../../data/class-room-api';
-import { getAllClassTimeBySchoolId } from '../../data/class-time-api';
+import { getAllClassRoomBySchoolId } from '../../../data/class-room-api';
+import { getAllClassTimeBySchoolId } from '../../../data/class-time-api';
+import AdminLayout from '../../../layout/adminLayout';
+import jwtDecode from 'jwt-decode';
 
 
 const AddRoutine = ({ handleCancel }) => {
@@ -20,15 +22,17 @@ const AddRoutine = ({ handleCancel }) => {
     const [classTimes, setClassTimes] = useState([]);
     const [checkDuplicate, setCheckDuplicate] = useState([]);
     const [checkByDay, setCheckByDay] = useState(null);
-    const [checkBTime, setCheckByTime] = useState(null);
-
+    const [checkByTime, setCheckByTime] = useState(null);
+    let [cnt, setCnt] = useState(0)
 
     const handleDays = (day) => {
         setCheckByDay(day)
     }
     const handleTimes = (time) => {
-        setCheckByTime(time)
+        setCheckByTime(time);
+        setCnt(0)
     }
+
 
     // duplicate data fetching
     useEffect(() => {
@@ -158,14 +162,29 @@ const AddRoutine = ({ handleCancel }) => {
 
     let clsTime = []
     let clsRoom = []
+    let teacherInfo = [];
     checkDuplicate?.map(el => {
         const schedule = el?.schedules
-        schedule?.map(data => {
-            if (data.class_time === checkBTime && data.day === checkByDay) {
+
+        schedule?.map((data, i) => {
+            // taking rooms, according to time and day
+            if (data.class_time === checkByTime && data.day === checkByDay) {
                 clsRoom.push(data.class_room)
+
+                // just for title, who actually occupied the room ?
+                if (data.day === checkByDay) {
+                    teacherInfo.push(el.teacher.firstName + " " + el.teacher.lastName)
+                }
+            }
+
+            // taking current teacher time, according to day
+            if (data.day === checkByDay && user._id === el.teacher._id) {
+                clsTime.push(data.class_time)
             }
         })
     })
+
+    teacherInfo.length > 0 && teacherInfo.reverse()
 
 
     return (
@@ -197,7 +216,7 @@ const AddRoutine = ({ handleCancel }) => {
                 <Form.List name="schedules">
                     {(fields, { add, remove }) => (
                         <>
-                            {fields.map(({ key, name, ...restField }) => (
+                            {fields.map(({ key, name,...restField }) => (
                                 <Space key={key} className='block' align="baseline">
                                     <div className='md:flex md:gap-3'>
 
@@ -231,7 +250,8 @@ const AddRoutine = ({ handleCancel }) => {
                                                     classTimes?.map((classTime, i) => <Option
                                                         key={i}
                                                         value={classTime}
-                                                    // disabled={clsTime?.includes(classTime) ? true : false}
+                                                        disabled={clsTime?.includes(classTime) ? true : false}
+                                                        title={clsTime?.includes(classTime) && "You've already taken"}
                                                     >
                                                         {classTime}
                                                     </Option>)
@@ -253,9 +273,11 @@ const AddRoutine = ({ handleCancel }) => {
                                                         key={i}
                                                         value={classRoom}
                                                         disabled={clsRoom?.includes(classRoom) ? true : false}
+                                                        title={clsRoom?.includes(classRoom) && cnt++} // teacherInfo[cnt++]
                                                     >
                                                         {classRoom}
-                                                    </Option>)
+                                                    </Option>
+                                                    )
                                                 }
                                             </Select>
 

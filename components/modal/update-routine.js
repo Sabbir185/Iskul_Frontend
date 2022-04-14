@@ -18,7 +18,7 @@ const UpdateRoutine = ({ id, routineData }) => {
 
     const [checkDuplicate, setCheckDuplicate] = useState([]);
     const [checkByDay, setCheckByDay] = useState(null);
-    const [checkBTime, setCheckByTime] = useState(null);
+    const [checkByTime, setCheckByTime] = useState(null);
 
     const handleDays = (day) => {
         setCheckByDay(day)
@@ -52,16 +52,32 @@ const UpdateRoutine = ({ id, routineData }) => {
     }, [checkByDay, user?.schoolId?._id])
 
 
+    // checking day, time and room to avoid conflict
     let clsTime = []
     let clsRoom = []
+    let teacherInfo = [];
     checkDuplicate?.map(el => {
         const schedule = el?.schedules
+
         schedule?.map(data => {
-            if (data.class_time === checkBTime && data.day === checkByDay) {
+            // taking rooms, according to time and day
+            if (data.class_time === checkByTime && data.day === checkByDay) {
                 clsRoom.push(data.class_room)
+
+                // just for title, who actually occupied the room ?
+                if (data.day === checkByDay) {
+                    teacherInfo.push(el.teacher.firstName + " " + el.teacher.lastName)
+                }
+            }
+
+            // taking current teacher time, according to day
+            if (data.day === checkByDay && user._id === el.teacher._id) {
+                clsTime.push(data.class_time)
             }
         })
     })
+
+    teacherInfo.length > 0 && teacherInfo.reverse()
 
 
     // fetch class rooms
@@ -214,7 +230,14 @@ const UpdateRoutine = ({ id, routineData }) => {
 
                                 <Select style={{ width: '150px' }} placeholder='select class time' showArrow={false} onChange={handleTimes}>
                                     {
-                                        classTimes?.map((classTime, i) => <Option key={i} value={classTime}>{classTime}</Option>)
+                                        classTimes?.map((classTime, i) => <Option
+                                            key={i}
+                                            value={classTime}
+                                            disabled={clsTime?.includes(classTime) ? true : false}
+                                            title={clsTime?.includes(classTime) && "You've already taken"}
+                                        >
+                                            {classTime}
+                                        </Option>)
                                     }
                                 </Select>
 

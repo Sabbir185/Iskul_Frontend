@@ -87,7 +87,6 @@ const ViewAllEnrolledStudent = () => {
         },
     ]
 
-    console.log(studentData)
 
     return (
         <AdminLayout>
