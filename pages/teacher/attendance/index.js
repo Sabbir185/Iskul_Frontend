@@ -15,6 +15,7 @@ const Attendance = () => {
   const [filteredSubject, setFilteredSubject] = useState([]);
   const [classID, setClassID] = useState(null);
 
+
   // data fetched by school and teacher id
   useEffect(() => {
     if (!!user) {
@@ -57,7 +58,6 @@ const Attendance = () => {
   const handleSubject = (id) => {
     setSubjectId(id);
   }
-
 
 
   return (
@@ -103,7 +103,7 @@ const Attendance = () => {
       {
         (!!classDate && !!classID && !!subjectId) &&
         <div>
-          <AttendanceCount classDate={classDate} classID={classID} user={user} subjectId={subjectId}/>
+          <AttendanceCount classDate={classDate} classID={classID} user={user} subjectId={subjectId} />
         </div>
       }
 

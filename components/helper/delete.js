@@ -162,13 +162,41 @@ const deleteStudentFromClass = async (clsId, stdId) => {
 }
 
 
+const deleteClassAttendance = async (id) => {
+    const token = await Cookies.get('token');
+    if (token) {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+            const response = await axios.delete(`http://localhost:8080/api/attendance/delete/${id}`, config);
 
-export { 
-    deleteUser, 
-    deleteSchool, 
-    deleteSubject, 
-    deleteClass, 
+            if (response?.data?.status === true)
+                return response.data;
+
+        } catch (error) {
+            if (error?.response?.data) {
+                return error?.response?.data
+
+            } else {
+                return error
+            }
+        }
+
+    } else {
+        return false
+    }
+}
+
+
+
+export {
+    deleteUser,
+    deleteSchool,
+    deleteSubject,
+    deleteClass,
     deleteNotice,
     deleteRoutine,
-    deleteStudentFromClass
- };
+    deleteStudentFromClass,
+    deleteClassAttendance
+};

@@ -4,11 +4,13 @@ import { message } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { FaTelegramPlane, FaCheck, FaTimes } from "react-icons/fa";
 import Table from '../../../components/table/table';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router'
 
 
 const AttendanceCount = ({ classDate, classID, user, subjectId }) => {
   const [studentData, setStudentData] = useState({});
+  const router = useRouter();
 
 
   // fetching class 
@@ -147,6 +149,9 @@ const AttendanceCount = ({ classDate, classID, user, subjectId }) => {
 
         if (res?.data?.status === true) {
           message.success(res.data.message)
+          setTimeout(() => {
+            router.push('/teacher/attendance/view-records');
+          }, 2600);
         }
 
       } catch (error) {
