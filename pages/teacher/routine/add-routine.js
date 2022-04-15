@@ -135,7 +135,7 @@ const AddRoutine = ({ handleCancel }) => {
                 }
 
             } catch (error) {
-                if (error.response.data.message) {
+                if (error?.response?.data?.message) {
                     message.success(error.response.data.message)
                 } else {
                     message.success(error.message)

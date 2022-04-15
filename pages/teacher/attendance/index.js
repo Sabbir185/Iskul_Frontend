@@ -11,6 +11,8 @@ const Attendance = () => {
   const { user } = useUser()
   const [classData, setClassData] = useState(null);
   const [classDate, setClassDate] = useState(null);
+  const [subjectId, setSubjectId] = useState(null);
+  const [filteredSubject, setFilteredSubject] = useState([]);
   const [classID, setClassID] = useState(null);
 
   // data fetched by school and teacher id
@@ -45,7 +47,17 @@ const Attendance = () => {
   // current class id
   const handleClass = (classId) => {
     setClassID(classId)
+    const targetClass = classData?.find(data => data._id === classId);
+    const teacherClassInfo = targetClass?.class_info?.filter(info => info.teachers._id === user._id)
+
+    // filter subject according to teacher which was set by headmaster/admin
+    setFilteredSubject(teacherClassInfo)
   }
+
+  const handleSubject = (id) => {
+    setSubjectId(id);
+  }
+
 
 
   return (
@@ -60,7 +72,7 @@ const Attendance = () => {
             </Form.Item>
           </Form>
         </div>
-        
+
         <div>
           <Form>
             <Form.Item name="class_name" label="Select Class" rules={[{ required: true, message: 'Please Select Class' }]} hasFeedback className='w-60'>
@@ -72,14 +84,26 @@ const Attendance = () => {
             </Form.Item>
           </Form>
         </div>
+
+        <div>
+          <Form>
+            <Form.Item name="subject" label="Select Subject" rules={[{ required: true, message: 'Please Select Subject' }]} hasFeedback>
+              <Select style={{ width: '100%' }} placeholder='choose subject...' onChange={handleSubject}>
+                {
+                  filteredSubject?.map((data, i) => <Option key={i} value={data.subjects._id}>{data.subjects.name}</Option>)
+                }
+              </Select>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
 
 
       {/* show all student */}
       {
-        (!!classDate && !!classID) &&
+        (!!classDate && !!classID && !!subjectId) &&
         <div>
-          <AttendanceCount classDate={classDate} classID={classID}/>
+          <AttendanceCount classDate={classDate} classID={classID} user={user} subjectId={subjectId}/>
         </div>
       }
 
