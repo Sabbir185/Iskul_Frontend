@@ -5,7 +5,7 @@ import AdminLayout from '../../layout/adminLayout';
 import Cookies from 'js-cookie';
 import { Button, Form, Input, message, Select, Modal } from 'antd';
 const { Option } = Select;
-import Table from '../../components/table/table';
+import TableFixed from '../../components/table/TableFixed';
 
 
 const ClassRoutine = () => {
@@ -58,32 +58,35 @@ const ClassRoutine = () => {
 
     const column = [
         {
-            dataField: 'class_name', headerName: 'Class', formatter: (class_name, data) => (
-                <p>{data.class_name.name}</p>
-            )
-        },
-        {
             dataField: 'subject', headerName: 'Subject', formatter: (_, data) => (
-                <p>{data.subject.name + ',  ' + data.subject.code}</p>
-            )
+                <span className='font-mono'>{data.subject.name?.toUpperCase()}, ({data.subject.code})</span>)
         },
         {
             dataField: 'teacher', headerName: 'Teacher', formatter: (_, data) => (
-                <p>{data.teacher.firstName + ' ' + data.teacher.lastName}</p>
-            )
+                <span className={`font-mono ${user?._id === data.teacher._id && 'text-green-500'}`}>{data.teacher.firstName + " " + data.teacher.lastName}</span>)
         },
+
         {
-            dataField: 'day1', headerName: 'Class Time', formatter: (_, data) => (
-                <p>{data.day1_time[0] + ', ' + data.day1_time[1]}</p>
-            )
-        },
-        {
-            dataField: 'day1', headerName: 'Class Time', formatter: (_, data) => (
-                <p>{data.day2_time[0] + ', ' + data.day2_time[1]}</p>
+            dataField: '', headerName: 'Day', formatter: (_, data) => (
+                data?.schedules?.map((d, i) => <li key={i} className='list-none text-md font-mono'>{d.day}</li>)
             )
         },
 
+        {
+            dataField: '', headerName: 'Time', formatter: (_, data) => (
+                data?.schedules?.map((t, i) => <li key={i} className='list-none text-md font-mono'>{t.class_time}</li>)
+            )
+        },
+
+        {
+            dataField: '', headerName: 'Room', formatter: (_, data) => (
+                data?.schedules?.map((r, i) => <li key={i} className='list-none text-md font-mono'>{r.class_room}</li>)
+            )
+        },
     ]
+
+    console.log('classData : ', classData)
+    console.log('routineData : ', routineData)
 
 
     return (
@@ -103,7 +106,7 @@ const ClassRoutine = () => {
             </section>
 
             <div className='text-md px-3'>
-                <Table data={routineData} columns={column} />
+                <TableFixed data={routineData} columns={column} />
             </div>
         </AdminLayout>
     );

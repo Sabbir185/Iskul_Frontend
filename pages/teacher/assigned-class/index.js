@@ -36,8 +36,8 @@ const AssignedClass = () => {
 
     return (
         <AdminLayout>
-            <section className='bg-slate-300 w-full h-full p-5 rounded-lg pb-10'>
-                <h1 className='text-center font-semibold text-lg text-slate-700'>Assigned Class List</h1>
+            <section className='bg-slate-100 w-full h-full p-5 rounded-lg pb-10'>
+                <h1 className='text-center font-mono font-semibold text-lg text-slate-700'>Assigned Class List</h1>
 
                 {
                     classData?.map(cls => <AssignedClassView key={cls._id} data={cls} />)

@@ -62,7 +62,7 @@ const Attendance = () => {
 
   return (
     <AdminLayout>
-      <h1 className='text-lg text-center text-slate-700 border-b-2 mx-10 md:mx-32 border-green-300 pt-3 pb-1'>Please select today&apos;s date and class</h1>
+      <h1 className='text-lg text-center font-mono text-slate-700 border-b-2 mx-10 md:mx-32 border-green-300 pt-3 pb-1'>Please select today&apos;s date and class</h1>
 
       <div className='md:flex md:items-center md:justify-center md:gap-10 pt-3'>
         <div className='flex items-center gap-2'>
