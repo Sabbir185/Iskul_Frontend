@@ -56,19 +56,19 @@ const ViewAllNotice = () => {
     const column = [
         {
             dataField: 'title', headerName: 'Title', formatter: (name, data) => (
-                <p>{name}</p>
+                <span className="block">{name}</span>
             )
         },
         {
             dataField: 'createdAt', headerName: 'Published', formatter: (createdAt, data) => (
-                <p>{new Date(createdAt).toLocaleDateString()}</p>
+                <span className="block">{new Date(createdAt).toLocaleDateString()}</span>
             )
         },
         {
             dataField: '_id', headerName: 'Action', formatter: (_id, data) => (
                 <div className={user?.role === 'student'? 'grid grid-cols-1 place-content-center' :'grid grid-cols-2 place-content-center'}>
-                    <p className='block text-xl text-green-500 cursor-pointer font-bold' title='download'> <a href={`http://localhost:8080/${data.file}`} target='_blank' rel="noreferrer"><CloudDownloadOutlined /></a> </p>
-                    <p onClick={() => deleteHandler(_id)} className={user?.role === 'student'? 'hidden': 'block font-bold text-xl text-red-500 cursor-pointer'} title="delete"><DeleteOutlined /></p>
+                    <span className='block text-xl text-green-500 cursor-pointer font-bold' title='download'> <a href={`http://localhost:8080/${data.file}`} target='_blank' rel="noreferrer"><CloudDownloadOutlined /></a> </span>
+                    <span onClick={() => deleteHandler(_id)} className={user?.role === 'student'? 'hidden': 'block font-bold text-xl text-red-500 cursor-pointer'} title="delete"><DeleteOutlined /></span>
                 </div>
             )
         },

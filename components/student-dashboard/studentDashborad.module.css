@@ -1,0 +1,13 @@
+.select_class__option {
+	position: absolute;
+	width: 300px;
+	top: 10px;
+	left: 32%;
+}
+
+@media only screen and (max-width: 1220px) {
+	.select_class__option {
+		position: static;
+		width: auto;
+	}
+}

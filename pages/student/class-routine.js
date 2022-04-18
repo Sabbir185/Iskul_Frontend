@@ -85,9 +85,6 @@ const ClassRoutine = () => {
         },
     ]
 
-    console.log('classData : ', classData)
-    console.log('routineData : ', routineData)
-
 
     return (
         <AdminLayout>

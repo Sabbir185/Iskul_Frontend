@@ -187,6 +187,9 @@ const AddRoutine = ({ handleCancel }) => {
     teacherInfo.length > 0 && teacherInfo.reverse()
 
 
+    console.log("checkDuplicate : ",checkDuplicate)
+
+
     return (
         <div>
             <Form

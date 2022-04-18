@@ -5,6 +5,7 @@ import { useUser } from '../../../contexts/userContext';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import CarouselAuto from '../../helper/carousel-auto';
+import { message } from 'antd';
 
 
 const NoticeRadicalChar = () => {
@@ -26,7 +27,7 @@ const NoticeRadicalChar = () => {
                         }
 
                     } catch (error) {
-                        if (error.response.data.message) {
+                        if (error?.response?.data?.message) {
                             message.error(error.response.data.message)
                         } else {
                             message.error(error.message)
@@ -44,7 +45,7 @@ const NoticeRadicalChar = () => {
 
     return (
         <section className='mt-5'>
-            <div className='md:grid md:grid-cols-2 md:gap-5 bg-slate-100 p-5 rounded-lg'>
+            <div className='md:grid md:grid-cols-2 md:gap-5 bg-gray-200 p-5 rounded-lg'>
                 {/* notices */}
                 <div className='bg-slate-50 h-52 pt-4'>
                     <h1 className='ml-11 border-b-2 mr-5 pt-3'>Latest Notices</h1>
@@ -53,7 +54,7 @@ const NoticeRadicalChar = () => {
                             noticeData?.map((notice, i) => <div key={i}>
                                 <ul>
                                     <li className='flex items-center justify-between mx-10'>
-                                        <p className='flex items-center gap-2 hover:bg-slate-200'><CheckCircleOutlined /> {notice.title}</p>
+                                        <p className='flex items-center gap-2 hover:bg-slate-200'><CheckCircleOutlined />{notice.title}</p>
                                         <p className='text-green-500 cursor-pointer text-lg' title='download'>
                                             <a href={`http://localhost:8080/${notice.file}`} target='_blank' rel="noreferrer" ><CloudDownloadOutlined /></a>
                                         </p>

@@ -119,7 +119,7 @@ const AddStudentInClass = () => {
             }
 
         } catch (error) {
-            if (error.response.data.message)
+            if (error?.response?.data?.message)
                 message.error(error.response.data.message)
             else
                  message.error(error.message)

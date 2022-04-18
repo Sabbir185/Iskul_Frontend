@@ -33,7 +33,7 @@ const AdminLayout = (props) => {
 					{props.children}
 				</main>
 
-				<div id="navbarToggle" className={`h-16 fixed left-0 md:left-64 top-0 right-0 bg-slate-100`}>
+				<div id="navbarToggle" className={`h-16 fixed left-0 md:left-64 top-0 right-0 bg-slate-200`}>
 					<Navbar toggleChange={toggleHandler}/>
 				</div>
 			</div>
