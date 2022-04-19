@@ -162,7 +162,7 @@ const AddRoutine = ({ handleCancel }) => {
 
     let clsTime = []
     let clsRoom = []
-    let teacherInfo = [];
+    let teacherInfo = {};
     checkDuplicate?.map(el => {
         const schedule = el?.schedules
 
@@ -173,7 +173,7 @@ const AddRoutine = ({ handleCancel }) => {
 
                 // just for title, who actually occupied the room ?
                 if (data.day === checkByDay) {
-                    teacherInfo.push(el.teacher.firstName + " " + el.teacher.lastName)
+                    teacherInfo[data.class_room] = el.teacher.firstName + " " + el.teacher.lastName
                 }
             }
 
@@ -183,11 +183,6 @@ const AddRoutine = ({ handleCancel }) => {
             }
         })
     })
-
-    teacherInfo.length > 0 && teacherInfo.reverse()
-
-
-    console.log("checkDuplicate : ",checkDuplicate)
 
 
     return (
@@ -276,7 +271,7 @@ const AddRoutine = ({ handleCancel }) => {
                                                         key={i}
                                                         value={classRoom}
                                                         disabled={clsRoom?.includes(classRoom) ? true : false}
-                                                        title={clsRoom?.includes(classRoom) && cnt++} // teacherInfo[cnt++]
+                                                        title={clsRoom?.includes(classRoom) && teacherInfo[classRoom]}
                                                     >
                                                         {classRoom}
                                                     </Option>
