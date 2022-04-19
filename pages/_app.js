@@ -4,8 +4,23 @@ import "metismenujs/dist/metismenujs.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { UserContextProvider } from "../contexts/userContext";
 import SearchInputContext from "../contexts/searchInputContext";
+import { useRouter } from "next/router";
+import PasswordReset from "./reset";
+
 
 function MyApp({ Component, pageProps }) {
+	const router = useRouter()
+
+	console.log(router)
+
+	const pathForPublic = router.asPath.split('/')
+
+	if (pathForPublic.includes('reset')) {
+
+		return (
+			<PasswordReset pathForPublic={pathForPublic}/>
+		)
+	}
 
 	return (
 		<UserContextProvider>

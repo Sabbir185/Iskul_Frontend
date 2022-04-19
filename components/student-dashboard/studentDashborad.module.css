@@ -1,8 +1,8 @@
 .select_class__option {
 	position: absolute;
-	width: 300px;
+	width: 280px;
 	top: 10px;
-	left: 32%;
+	left: 34%;
 }
 
 @media only screen and (max-width: 1220px) {

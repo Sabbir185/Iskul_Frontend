@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { useState } from 'react'
+import PasswordResetRequest from "../components/modal/passwordResetRequest";
 
 
 const Login = () => {
@@ -36,11 +37,6 @@ const Login = () => {
         setToggleLogin(false)
         setIsModalVisible(true);
     }
-    const handleOk = () => {
-        setIsModalVisible(false);
-        setToggleLogin(true)
-    };
-
     const handleCancel = () => {
         setIsModalVisible(false);
         setToggleLogin(true)
@@ -116,14 +112,12 @@ const Login = () => {
                                 Log in
                             </Button>
                         </Form>
-                        <p>Forgot your password? <span onClick={handleResetPassword} className="underline cursor-pointer">Click</span></p>
+                        <p>Forgot your password? <span onClick={handleResetPassword} className="underline cursor-pointer text-green-600">Click</span></p>
                     </div>
                 </div>
 
-                <Modal title="Reset Your Password" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                <Modal title="Request For Resetting Password" visible={isModalVisible} footer={null} onCancel={handleCancel} >
+                    <PasswordResetRequest setIsModalVisible={setIsModalVisible} setToggleLogin={setToggleLogin}/>
                 </Modal>
             </div>
         </div>
