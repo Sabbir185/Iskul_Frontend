@@ -11,7 +11,7 @@ const PasswordResetRequest = ({ setIsModalVisible, setToggleLogin }) => {
         const res = await axios.post('http://localhost:8080/api/user/send-password-reset-email', values);
 
         if (res?.data?.status === true) {
-          message.success(res.data.message);
+          message.success(res.data.message, 5);
           setIsModalVisible(false);
           setToggleLogin(true)
         }

@@ -11,8 +11,6 @@ import PasswordReset from "./reset";
 function MyApp({ Component, pageProps }) {
 	const router = useRouter()
 
-	console.log(router)
-
 	const pathForPublic = router.asPath.split('/')
 
 	if (pathForPublic.includes('reset')) {
