@@ -70,11 +70,11 @@ const ClassRoutineView = ({ id }) => {
     const column = [
         {
             dataField: 'subject', headerName: 'Subject', formatter: (_, data) => (
-                <p className='font-mono'>{data.subject.name?.toUpperCase()}</p>)
+                <p className='font-mono'>{data?.subject?.name?.toUpperCase()}</p>)
         },
         {
             dataField: 'teacher', headerName: 'Teacher', formatter: (_, data) => (
-                <p className={`font-mono ${user?._id === data.teacher._id && 'text-green-500'}`}>{data.teacher.firstName + " " + data.teacher.lastName}</p>)
+                <p className={`font-mono ${user?._id === data?.teacher?._id && 'text-green-500'}`}>{data?.teacher?.firstName + " " + data?.teacher?.lastName}</p>)
         },
 
         {

@@ -2,7 +2,6 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 const deleteUser = async (id) => {
-    console.log(id)
     const token = await Cookies.get('token');
     if (token) {
         try {
@@ -25,7 +24,6 @@ const deleteUser = async (id) => {
 
 
 const deleteSchool = async (id) => {
-    console.log(id)
     const token = await Cookies.get('token');
     if (token) {
         try {
@@ -47,7 +45,6 @@ const deleteSchool = async (id) => {
 }
 
 const deleteSubject = async (id) => {
-    console.log(id)
     const token = await Cookies.get('token');
     if (token) {
         try {
@@ -70,7 +67,6 @@ const deleteSubject = async (id) => {
 
 
 const deleteClass = async (id) => {
-    console.log(id)
     const token = await Cookies.get('token');
     if (token) {
         try {

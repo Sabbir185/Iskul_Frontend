@@ -14,7 +14,6 @@ const EditSubject = () => {
     const code = router.query.slug[1];
     const subID = router.query.slug[2];
 
-    console.log(subID)
 
     const onSubmit = async (values) => {
         try {

@@ -19,8 +19,8 @@ const AssignedClassView = ({ data }) => {
                 <hr />
 
                 {
-                    data?.class_info?.map((data, i) => <ul key={i} className='font-mono mt-2'>
-                        <li>{data.subjects.name}</li>
+                    data?.class_info?.map((info, i) => <ul key={i+1} className='font-mono mt-2'>
+                        <li>{info.subjects.name}</li>
                         <hr />
                     </ul>)
                 }
@@ -31,8 +31,8 @@ const AssignedClassView = ({ data }) => {
                 <hr />
 
                 {
-                    data?.class_info?.map((data, i) => <ul key={i} className='font-mono mt-2'>
-                        <li className={data.teachers.firstName===user.firstName? 'text-green-500':''}>{data.teachers.firstName + " " + data.teachers.lastName}</li>
+                    data?.class_info?.map((info, i) => <ul key={i+2} className='font-mono mt-2'>
+                        <li className={info?.teachers?.firstName===user.firstName? 'text-green-500':''}>{info?.teachers?.firstName + " " + info?.teachers?.lastName}</li>
                         <hr />
                     </ul>)
                 }

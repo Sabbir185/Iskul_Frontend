@@ -39,7 +39,6 @@ const CreateClassTime = () => {
     }
 
     const onFinish = (values) => {
-        // console.log(times)
 
         if (!!times) {
             const schoolID = user?.schoolId?._id;

@@ -86,9 +86,7 @@ const ViewClasses = () => {
             )
         },
     ]
-
-
-    // console.log(classes)
+    
 
     return (
         <AdminLayout>

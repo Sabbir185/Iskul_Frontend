@@ -33,7 +33,6 @@ const AssignedClass = () => {
     }, [user])
 
 
-
     return (
         <AdminLayout>
             <section className='bg-slate-100 w-full h-full p-5 rounded-lg pb-10'>

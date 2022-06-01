@@ -24,8 +24,6 @@ const TeacherAdd = () => {
                 }
                 const response = await axios.post('http://localhost:8080/api/user/signup', values, config);
 
-                console.log(response.data.status)
-
                 if (response.data.status === true) {
                     message.success('New Teacher Created Successfully!');
                     setTimeout(() => {

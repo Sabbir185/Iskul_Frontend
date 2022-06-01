@@ -9,7 +9,6 @@ const PasswordChange = ({ setIsModalVisible }) => {
     const [form] = Form.useForm();
 
     const onFinish = async (values) => {
-        console.log(values)
         try {
             const token = await Cookies.get('token');
             const config = {

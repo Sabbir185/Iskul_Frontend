@@ -24,7 +24,6 @@ const CreateClass = () => {
     const onFinish = async (values) => {
         values.school = user?.schoolId?._id;
         const res = await createNewClass(values);
-        console.log(res)
         if (res.status) {
             message.success(res.message)
             setTimeout(() => {
