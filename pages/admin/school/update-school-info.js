@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const UpdateSchoolInfo = () => {
     const router = useRouter()
-    const { searchResult } = useSearchResult()
+    let { searchResult } = useSearchResult()
 
     const editHandler = (id) => {
         router.push(`/admin/school/edit/${id}`)
@@ -67,4 +67,3 @@ const UpdateSchoolInfo = () => {
 };
 
 export default UpdateSchoolInfo;
-// talsher@gmail.com

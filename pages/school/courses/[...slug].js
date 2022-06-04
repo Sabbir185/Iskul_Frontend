@@ -10,9 +10,10 @@ import { useRouter } from 'next/router'
 const EditSubject = () => {
     const router = useRouter();
     const { user } = useUser();
-    const subName = router.query.slug[0];
-    const code = router.query.slug[1];
-    const subID = router.query.slug[2];
+    let { slug = [] } = router?.query;
+    const subName = slug[0] || '';
+    const code = slug[1] || '';
+    const subID = slug[2] || '';
 
 
     const onSubmit = async (values) => {

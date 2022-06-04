@@ -4,8 +4,9 @@ import { useUser } from '../../contexts/userContext';
 import AdminLayout from '../../layout/adminLayout';
 import Cookies from 'js-cookie';
 import { Button, Form, Input, message, Select, Modal } from 'antd';
-const { Option } = Select;
 import TableFixed from '../../components/table/TableFixed';
+const { Option } = Select;
+
 
 
 const ClassRoutine = () => {

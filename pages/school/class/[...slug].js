@@ -13,8 +13,9 @@ import { getAllClassTimeBySchoolId } from '../../../data/class-time-api';
 const UpdateClass = () => {
     const { user } = useUser();
     const router = useRouter();
-    const className = router?.query?.slug[0] || '';
-    const classID = router?.query?.slug[1] || '';
+    let { slug = [] } = router?.query;
+    const clsName = slug[0] || '';
+    const classID = slug[1] || '';
 
     const [classRooms, setClassRooms] = useState([]);
     const [classTimes, setClassTimes] = useState([]);
@@ -25,7 +26,7 @@ const UpdateClass = () => {
         if (!!schoolId) {
             const getRooms = async () => {
                 const res = await getAllClassRoomBySchoolId(schoolId);
-                setClassRooms(res.class_rooms.class_rooms)
+                setClassRooms(res?.class_rooms?.class_rooms)
             }
             getRooms();
         }
@@ -37,7 +38,7 @@ const UpdateClass = () => {
         if (!!schoolId) {
             const getTimes = async () => {
                 const res = await getAllClassTimeBySchoolId(schoolId);
-                setClassTimes(res.class_times.class_times)
+                setClassTimes(res?.class_times?.class_times)
             }
             getTimes();
         }
@@ -85,8 +86,6 @@ const UpdateClass = () => {
         classTimeSelectedData.push(<Option key={i} value={classTimes[i]}>{classTimes[i]}</Option>);
     }
 
-
-
     return (
         <AdminLayout>
             <div className='bg-slate-300 h-full pb-10'>
@@ -98,7 +97,7 @@ const UpdateClass = () => {
                             label="Class Name"
                             name="name"
                         >
-                            <Input placeholder={className} />
+                            <Input placeholder={clsName} />
                         </Form.Item>
 
                         <Form.Item name="class_rooms" label="Select Class Rooms">
