@@ -11,6 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@metismenu/react": "^0.0.2",
+    "@netlify/plugin-nextjs": "^4.7.1",
     "antd": "^4.19.0",
     "axios": "^0.26.1",
     "chart.js": "^3.7.1",
